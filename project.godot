@@ -1,0 +1,77 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="CMC-game"
+config/version="0.1.0"
+config/tags=PackedStringArray("template")
+config/features=PackedStringArray("4.4", "GL Compatibility")
+run/max_fps=60
+boot_splash/fullsize=false
+boot_splash/use_filter=false
+config/icon="uid://ctenb3f0cwdsr"
+boot_splash/minimum_display_time=300
+
+[debug]
+
+settings/stdout/print_fps=true
+settings/stdout/print_gpu_profile=true
+settings/stdout/verbose_stdout=true
+gdscript/warnings/untyped_declaration=1
+gdscript/warnings/inferred_declaration=1
+gdscript/warnings/unsafe_property_access=1
+gdscript/warnings/unsafe_method_access=1
+gdscript/warnings/unsafe_cast=1
+gdscript/warnings/unsafe_call_argument=1
+gdscript/warnings/return_value_discarded=1
+
+[display]
+
+window/size/viewport_width=640
+window/size/viewport_height=360
+window/size/window_width_override=1920
+window/size/window_height_override=1080
+window/stretch/mode="viewport"
+window/stretch/scale_mode="integer"
+
+[editor]
+
+naming/default_signal_callback_name="_on{NodeName}_{signalName}"
+naming/default_signal_callback_to_self_name="_on{SignalName}"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/script-ide/plugin.cfg")
+
+[file_customization]
+
+folder_colors={
+"res://addons/": "gray",
+"res://assets/": "red",
+"res://autoloads/": "orange",
+"res://docs/": "gray",
+"res://licenses/": "gray",
+"res://script_templates/": "gray"
+}
+
+[physics]
+
+common/physics_jitter_fix=0.0
+2d/default_gravity=0.0
+common/physics_interpolation=true
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+2d/snap/snap_2d_transforms_to_pixel=true
+2d/snap/snap_2d_vertices_to_pixel=true
