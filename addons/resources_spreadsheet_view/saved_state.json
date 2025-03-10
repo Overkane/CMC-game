@@ -1,0 +1,57 @@
+{
+  "column_properties": {
+    "res://example/Items/": {
+      "resource_local_to_scene": {
+        "visibility": 0
+      },
+      "resource_name": {
+        "visibility": 0
+      },
+      "resource_path": {
+        "visibility": 0
+      }
+    },
+    "res://example/Items/items/": {
+      "resource_local_to_scene": {
+        "visibility": 0
+      },
+      "resource_name": {
+        "visibility": 0
+      }
+    },
+    "res://example/Random Upgrades/": {
+      "resource_local_to_scene": {
+        "visibility": 0
+      },
+      "resource_name": {
+        "visibility": 0
+      }
+    },
+    "res://resources/biome_info/": {
+      "resource_local_to_scene": {
+        "visibility": 0
+      },
+      "resource_name": {
+        "visibility": 0
+      }
+    },
+    "res://resources/biomes/": {
+      "resource_local_to_scene": {
+        "visibility": 0
+      },
+      "resource_name": {
+        "visibility": 0
+      }
+    }
+  },
+  "recent_paths": [
+    "res://example/Items/",
+    "res://example/Items/items/",
+    "res://example/Random Upgrades/",
+    "res://resources/biome_info/",
+    "res://resources/biomes/"
+  ],
+  "table_functions": {
+
+  }
+}

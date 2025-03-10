@@ -49,7 +49,7 @@ naming/default_signal_callback_to_self_name="_on{SignalName}"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/script-ide/plugin.cfg")
+enabled=PackedStringArray("res://addons/resources_spreadsheet_view/plugin.cfg", "res://addons/script-ide/plugin.cfg")
 
 [file_customization]
 
