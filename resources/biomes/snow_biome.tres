@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Biome" load_steps=2 format=3 uid="uid://btu8p2uaqgmik"]
+
+[ext_resource type="Script" uid="uid://d2ek2lhs3uda8" path="res://resources/biomes/biome.gd" id="1_xxwf7"]
+
+[resource]
+script = ExtResource("1_xxwf7")
+biomeType = 2
+numberOfChunks = 4
+metadata/_custom_type_script = "uid://d2ek2lhs3uda8"
