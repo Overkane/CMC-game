@@ -19,4 +19,6 @@ texture = ExtResource("1_8afob")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(240, 0)
-position_smoothing_enabled = true
+drag_vertical_enabled = true
+drag_top_margin = 1.0
+drag_bottom_margin = 1.0
