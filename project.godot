@@ -34,6 +34,10 @@ boot_splash/use_filter=false
 config/icon="uid://ctenb3f0cwdsr"
 boot_splash/minimum_display_time=300
 
+[autoload]
+
+GameConstants="*res://autoloads/game_constants.gd"
+
 [debug]
 
 settings/stdout/print_fps=true

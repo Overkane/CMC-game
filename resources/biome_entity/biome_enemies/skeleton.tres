@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="BiomeEnemy" load_steps=3 format=3 uid="uid://b7wb22e34cdqi"]
+
+[ext_resource type="Script" uid="uid://b2xccu6kwv00o" path="res://resources/biome_entity/biome_enemies/biome_enemy.gd" id="1_cvmqo"]
+[ext_resource type="Texture2D" uid="uid://ctenb3f0cwdsr" path="res://icon.svg" id="2_vpqdf"]
+
+[resource]
+script = ExtResource("1_cvmqo")
+sprite = ExtResource("2_vpqdf")
+metadata/_custom_type_script = "uid://b2xccu6kwv00o"

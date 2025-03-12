@@ -1,7 +1,20 @@
-[gd_resource type="Resource" script_class="BiomeInfo" load_steps=2 format=3 uid="uid://dt0y4n4l4vp2p"]
+[gd_resource type="Resource" script_class="Biome" load_steps=6 format=3 uid="uid://dt0y4n4l4vp2p"]
 
-[ext_resource type="Script" uid="uid://d2ek2lhs3uda8" path="res://resources/biomes/biome.gd" id="1_3veeb"]
+[ext_resource type="Script" uid="uid://d10vaqoc62jaf" path="res://resources/biome_entity/biome_bonuses/biome_bonus.gd" id="1_pgsk4"]
+[ext_resource type="Script" uid="uid://b2xccu6kwv00o" path="res://resources/biome_entity/biome_enemies/biome_enemy.gd" id="2_ucqm8"]
+[ext_resource type="Resource" uid="uid://b7wb22e34cdqi" path="res://resources/biome_entity/biome_enemies/skeleton.tres" id="3_c1n6f"]
+[ext_resource type="Script" uid="uid://cx5rm5tkpr7hh" path="res://resources/biome_entity/biome_obstacles/biome_obstacle.gd" id="4_5yvjx"]
+[ext_resource type="Script" uid="uid://d2ek2lhs3uda8" path="res://resources/biomes/biome.gd" id="5_f4emr"]
 
 [resource]
-script = ExtResource("1_3veeb")
+script = ExtResource("5_f4emr")
+biomeType = 0
+numberOfChunks = 4
+boss = ExtResource("3_c1n6f")
+enemyList = Array[ExtResource("2_ucqm8")]([ExtResource("3_c1n6f")])
+bonusList = Array[ExtResource("1_pgsk4")]([])
+obstacleList = Array[ExtResource("4_5yvjx")]([])
+numberOfEnemies = 8
+numberOfBonuses = 8
+numberOfObstacles = 8
 metadata/_custom_type_script = "uid://d2ek2lhs3uda8"

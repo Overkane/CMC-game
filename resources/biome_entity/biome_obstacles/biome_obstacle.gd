@@ -1,0 +1,2 @@
+extends BiomeEntity
+class_name BiomeObstacle
