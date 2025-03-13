@@ -9,8 +9,9 @@
 ## General Guidelines
 
 - Use explicit strict typing whenever possible. E.g. `var my_int_var: int = 5`, `func myFunc() -> void`.
-- Use PackedArrays whenever possible for big arrays (expected more than 1000 elements).
 - Set node properties before adding it to the node tree whenever possible.
+- Array - use PackedArrays whenever possible for big arrays (expected more than 1000 elements).
+- Array - prefer to add and remove elements from the end, since it is the fastest.
 
 ---
 ## Naming Conventions
@@ -27,6 +28,7 @@
 | Signals           | camelCase                 | `signal doorOpened`           |
 | Signal functions  | on{NodeName}_{signalName} | `onArea2D_bodyEntered`        |
 | Constants         | CONSTANT_CASE             | `const MAX_SPEED = 200`       |
+| Private Constants | _CONSTANT_CASE            | `const _MAX_SPEED = 200`      |
 | Enum names        | PascalCase                | `enum Element`                |
 | Enum members      | CONSTANT_CASE             | `{ EARTH, WATER, AIR, FIRE }` |
 
