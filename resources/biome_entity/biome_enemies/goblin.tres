@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="BiomeEnemy" load_steps=5 format=3 uid="uid://duksuj7m45wnm"]
+
+[ext_resource type="Script" uid="uid://b2xccu6kwv00o" path="res://resources/biome_entity/biome_enemies/biome_enemy.gd" id="1_es3bn"]
+[ext_resource type="Script" uid="uid://cgjljwqr8u107" path="res://resources/base_stats/base_stats.gd" id="1_qljac"]
+[ext_resource type="Texture2D" uid="uid://blth7wk0nikiq" path="res://assets/art/enemies/goblin.png" id="2_es3bn"]
+
+[sub_resource type="Resource" id="Resource_ejlhq"]
+script = ExtResource("1_qljac")
+maxHP = 10
+currentHP = 10
+currentArmor = 0
+currentDamage = 1
+metadata/_custom_type_script = "uid://cgjljwqr8u107"
+
+[resource]
+script = ExtResource("1_es3bn")
+enemyStats = SubResource("Resource_ejlhq")
+sprite = ExtResource("2_es3bn")
+metadata/_custom_type_script = "uid://b2xccu6kwv00o"

@@ -3,7 +3,9 @@ extends Node
 const _INITIAL_PATH_OFFSET := 200.0
 const _END_PATH_OFFSET := 150.0
 const _MINIMAL_DISTANCE_BETWEEN_BIOME_ENTITIES := 100.0
-const _BIOME_ENTITY_SCENE: PackedScene = preload("res://scenes/biome_entity_scene/biome_entity_scene.tscn")
+const _ENEMY_SCENE: PackedScene = preload("res://scenes/interactibles/enemy/enemy.tscn")
+const _BONUS_SCENE: PackedScene = preload("res://scenes/interactibles/bonus/bonus.tscn")
+const _OBSTACLE_SCENE: PackedScene = preload("res://scenes/interactibles/obstacle/obstacle.tscn")
 const _BIOMES: Array[Biome] = [
 	preload("res://resources/biomes/forest_biome.tres"),
 	preload("res://resources/biomes/desert_biome.tres"),
@@ -14,6 +16,7 @@ const _BIOMES: Array[Biome] = [
 
 
 func _ready() -> void:
+	GameConstants.player = %Player
 	_generateBiomes()
 
 
@@ -52,7 +55,11 @@ func _generateBiomes() -> void:
 				var positionChange := randf_range(_MINIMAL_DISTANCE_BETWEEN_BIOME_ENTITIES, distanceForOneEntity + distanceRemainder)
 				biomeEntityPosition.x += positionChange
 
-				var biomeEntityObject := _BIOME_ENTITY_SCENE.instantiate()
+				var biomeEntityObject = _ENEMY_SCENE.instantiate()
+				if biomeEntity is BiomeBonus:
+					biomeEntityObject = _BONUS_SCENE.instantiate()
+				elif biomeEntity is BiomeObstacle:
+					biomeEntityObject = _OBSTACLE_SCENE.instantiate()
 				biomeEntityObject.setup(biomeEntity, biomeEntityPosition)
 				add_child(biomeEntityObject)
 
@@ -60,7 +67,7 @@ func _generateBiomes() -> void:
 
 			# Spawn boss
 			var bossPosition := Vector2(fullBiomeDistance + biomeDistanceShift, biomeEntityPosition.y)
-			var biomeEntityObject := _BIOME_ENTITY_SCENE.instantiate()
+			var biomeEntityObject := _ENEMY_SCENE.instantiate()
 			biomeEntityObject.setup(biome.boss, bossPosition)
 			add_child(biomeEntityObject)
 

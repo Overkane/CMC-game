@@ -1,6 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://ba8x644jj4hqk"]
+[gd_scene load_steps=3 format=3 uid="uid://dbnqbs85vvbu3"]
 
-[ext_resource type="Script" uid="uid://d17uxejf11ghl" path="res://scenes/biome_entity_scene/biome_entity_scene.gd" id="1_0uh0p"]
+[ext_resource type="Script" uid="uid://bsbow5n46g1lv" path="res://scenes/interactibles/obstacle/obstacle.gd" id="1_uhjll"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b87e6"]
 size = Vector2(16, 16)
@@ -9,7 +9,7 @@ size = Vector2(16, 16)
 collision_layer = 2
 collision_mask = 0
 monitoring = false
-script = ExtResource("1_0uh0p")
+script = ExtResource("1_uhjll")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_b87e6")

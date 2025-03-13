@@ -1,24 +1,97 @@
-[gd_scene load_steps=4 format=3 uid="uid://bc6ovnknimcn5"]
+[gd_scene load_steps=9 format=3 uid="uid://bc6ovnknimcn5"]
 
-[ext_resource type="Texture2D" uid="uid://ctenb3f0cwdsr" path="res://icon.svg" id="1_8afob"]
 [ext_resource type="Script" uid="uid://cksapot0t6r7m" path="res://scenes/player/player.gd" id="1_dovo2"]
+[ext_resource type="Script" uid="uid://cgjljwqr8u107" path="res://resources/base_stats/base_stats.gd" id="2_gmlin"]
+[ext_resource type="Texture2D" uid="uid://btjuy3ulnnfgo" path="res://assets/art/player/player.png" id="3_gmlin"]
+[ext_resource type="Texture2D" uid="uid://cbyivm5u65p5m" path="res://assets/icons/heart_icon.png" id="4_0owmy"]
+[ext_resource type="Texture2D" uid="uid://ctiroj6p3w3pu" path="res://assets/icons/sword_icon.png" id="5_qek5x"]
+[ext_resource type="Texture2D" uid="uid://d37icpms0tda4" path="res://assets/icons/shield_icon.png" id="6_5gtgg"]
+
+[sub_resource type="Resource" id="Resource_lvxji"]
+script = ExtResource("2_gmlin")
+maxHP = 20
+currentHP = 20
+currentArmor = 0
+currentDamage = 3
+metadata/_custom_type_script = "uid://cgjljwqr8u107"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dovo2"]
-size = Vector2(69, 66)
+size = Vector2(22, 34)
 
 [node name="Player" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
 script = ExtResource("1_dovo2")
+_baseStats = SubResource("Resource_lvxji")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, 0)
+position = Vector2(-1, -9)
 shape = SubResource("RectangleShape2D_dovo2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("1_8afob")
+texture = ExtResource("3_gmlin")
+offset = Vector2(0, -8)
+flip_h = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(240, 0)
 drag_vertical_enabled = true
 drag_top_margin = 1.0
 drag_bottom_margin = 1.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -26.0
+offset_top = -24.0
+offset_right = 2.0
+offset_bottom = 35.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="HPLabel" type="Label" parent="VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "1"
+
+[node name="HPIcon" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("4_0owmy")
+expand_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="DamageLabel" type="Label" parent="VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "1"
+
+[node name="DamageIcon" type="TextureRect" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+texture = ExtResource("5_qek5x")
+expand_mode = 2
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="ArmorLabel" type="Label" parent="VBoxContainer/HBoxContainer3"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "1"
+
+[node name="ArmorIcon" type="TextureRect" parent="VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+texture = ExtResource("6_5gtgg")
+expand_mode = 2
