@@ -79,6 +79,18 @@ folder_colors={
 "res://script_templates/": "gray"
 }
 
+[gui]
+
+theme/custom="uid://b7443jj0kv7ai"
+
+[importer_defaults]
+
+font_data_dynamic={
+&"antialiasing": 0,
+&"hinting": 0,
+&"subpixel_positioning": 0
+}
+
 [input]
 
 left={

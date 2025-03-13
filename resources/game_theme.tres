@@ -1,0 +1,6 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://b7443jj0kv7ai"]
+
+[ext_resource type="FontFile" uid="uid://hsgt22g1xqbn" path="res://assets/fonts/Sixtyfour/Sixtyfour-Regular-VariableFont_BLED,SCAN.ttf" id="1_ntlge"]
+
+[resource]
+default_font = ExtResource("1_ntlge")
