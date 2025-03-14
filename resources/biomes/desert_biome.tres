@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Biome" load_steps=7 format=3 uid="uid://borv82a02dcop"]
+[gd_resource type="Resource" script_class="Biome" load_steps=10 format=3 uid="uid://borv82a02dcop"]
 
 [ext_resource type="Script" uid="uid://d2ek2lhs3uda8" path="res://resources/biomes/biome.gd" id="1_ft773"]
 [ext_resource type="Script" uid="uid://d10vaqoc62jaf" path="res://resources/biome_entity/biome_bonuses/biome_bonus.gd" id="1_o6eln"]
@@ -6,6 +6,9 @@
 [ext_resource type="Resource" uid="uid://b7wb22e34cdqi" path="res://resources/biome_entity/biome_enemies/skeleton.tres" id="3_dm6iy"]
 [ext_resource type="Resource" uid="uid://di8bm4j6ghley" path="res://resources/biome_entity/biome_enemies/slime.tres" id="4_7nug8"]
 [ext_resource type="Script" uid="uid://cx5rm5tkpr7hh" path="res://resources/biome_entity/biome_obstacles/biome_obstacle.gd" id="4_e3ggg"]
+[ext_resource type="Texture2D" uid="uid://uiiopkuyvnvq" path="res://assets/art/props/autumn_bush.png" id="6_nugm4"]
+[ext_resource type="Texture2D" uid="uid://c6o7lf2ivaslx" path="res://assets/art/props/autumn_bush2.png" id="7_ma54t"]
+[ext_resource type="Texture2D" uid="uid://c1cd3tc0ykwwu" path="res://assets/art/props/autumn_tree.png" id="9_7yj3l"]
 
 [resource]
 script = ExtResource("1_ft773")
@@ -18,4 +21,8 @@ obstacleList = Array[ExtResource("4_e3ggg")]([])
 numberOfEnemies = 8
 numberOfBonuses = 8
 numberOfObstacles = 8
+treeSprites = Array[Texture2D]([ExtResource("9_7yj3l")])
+maxNumberOfTressPerChunk = 4
+propSprites = Array[Texture2D]([ExtResource("6_nugm4"), ExtResource("7_ma54t")])
+maxNumberOfPropsPerChunk = 20
 metadata/_custom_type_script = "uid://d2ek2lhs3uda8"
