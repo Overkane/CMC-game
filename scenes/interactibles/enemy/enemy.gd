@@ -19,7 +19,8 @@ func setup(biomeEntity: BiomeEnemy, biomeEntityPosition: Vector2) -> void:
 
 func interact() -> void:
 	GameConstants.player.changeHP(-_damageToThePlayer)
-	_destroy()
+	if not GameConstants.player.isDead:
+		_destroy()
 
 
 func _updateTotalDamageToThePlayer() -> void:
