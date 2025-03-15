@@ -14,7 +14,7 @@ var _currentExp := 0
 
 func _ready() -> void:
 	var expPerLevel := _expForFirstLevel
-	for i in range(1, _maxLevel - 1): # Level 1 doesn't count
+	for i in range(1, _maxLevel):
 		_expPerLevelList.push_back(expPerLevel)
 		expPerLevel += i * _expIncreasePerLevel
 
