@@ -10,10 +10,9 @@
 [sub_resource type="Resource" id="Resource_lvxji"]
 resource_local_to_scene = true
 script = ExtResource("2_gmlin")
-maxHP = 20
-currentHP = 20
-currentArmor = 0
-currentDamage = 3
+maxHP = 100
+currentArmor = 1
+currentDamage = 4
 metadata/_custom_type_script = "uid://cgjljwqr8u107"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dovo2"]
