@@ -1,14 +1,21 @@
-[gd_resource type="Resource" script_class="Biome" load_steps=10 format=3 uid="uid://btu8p2uaqgmik"]
+[gd_resource type="Resource" script_class="Biome" load_steps=17 format=3 uid="uid://btu8p2uaqgmik"]
 
 [ext_resource type="Script" uid="uid://d10vaqoc62jaf" path="res://resources/biome_entity/biome_bonuses/biome_bonus.gd" id="1_cabl0"]
 [ext_resource type="Script" uid="uid://d2ek2lhs3uda8" path="res://resources/biomes/biome.gd" id="1_xxwf7"]
+[ext_resource type="Resource" uid="uid://b7ioc7fkywxpb" path="res://resources/biome_entity/biome_bonuses/damage_bonus_2.tres" id="2_4isnv"]
 [ext_resource type="Script" uid="uid://b2xccu6kwv00o" path="res://resources/biome_entity/biome_enemies/biome_enemy.gd" id="2_xehji"]
 [ext_resource type="Resource" uid="uid://csdmfbxblloea" path="res://resources/biome_entity/biome_enemies/snow/ghoul.tres" id="3_02vlf"]
+[ext_resource type="Resource" uid="uid://cudlsdxsda8c1" path="res://resources/biome_entity/biome_bonuses/armor_bonus_1.tres" id="3_4mr46"]
 [ext_resource type="Script" uid="uid://cx5rm5tkpr7hh" path="res://resources/biome_entity/biome_obstacles/biome_obstacle.gd" id="4_36kbx"]
+[ext_resource type="Resource" uid="uid://854fma386ut0" path="res://resources/biome_entity/biome_bonuses/hp_potion.tres" id="4_ds1ws"]
 [ext_resource type="Resource" uid="uid://ds0bgmljc5wpw" path="res://resources/biome_entity/biome_enemies/snow/necromancer.tres" id="4_qddrl"]
+[ext_resource type="Resource" uid="uid://vi1fhcp5xx2l" path="res://resources/biome_entity/biome_bonuses/speed_bonus_1.tres" id="5_65pmf"]
 [ext_resource type="Resource" uid="uid://28j3ji2xaavk" path="res://resources/biome_entity/biome_enemies/snow/skeleton.tres" id="5_qtj3m"]
 [ext_resource type="Resource" uid="uid://cp8qiiti5tujq" path="res://resources/biome_entity/biome_enemies/snow/zombie.tres" id="6_31dge"]
+[ext_resource type="Resource" uid="uid://djcjyqaeuc82u" path="res://resources/biome_entity/biome_bonuses/damage_bonus_3.tres" id="6_dkib7"]
+[ext_resource type="Resource" uid="uid://b8sf21n7aon84" path="res://resources/biome_entity/biome_bonuses/armor_bonus_2.tres" id="7_1h5x5"]
 [ext_resource type="Resource" uid="uid://d1lxppl4wqa4e" path="res://resources/biome_entity/biome_enemies/snow/death_knight.tres" id="8_4h1w0"]
+[ext_resource type="Resource" uid="uid://pdnqpbxhq0w7" path="res://resources/biome_entity/biome_bonuses/speed_bonus_2.tres" id="8_rqx8m"]
 
 [resource]
 script = ExtResource("1_xxwf7")
@@ -24,8 +31,16 @@ ExtResource("6_31dge"): 70.0
 _numberOfEnemies = 10
 _obstacleListWithWeights = Dictionary[ExtResource("4_36kbx"), float]({})
 _numberOfObstacles = 4
-_bonusListWithWeights = Dictionary[ExtResource("1_cabl0"), float]({})
-_numberOfBonuses = 4
+_bonusListWithWeights = Dictionary[ExtResource("1_cabl0"), float]({
+ExtResource("2_4isnv"): 30.0,
+ExtResource("3_4mr46"): 10.0,
+ExtResource("4_ds1ws"): 40.0,
+ExtResource("5_65pmf"): 10.0,
+ExtResource("6_dkib7"): 50.0,
+ExtResource("7_1h5x5"): 40.0,
+ExtResource("8_rqx8m"): 30.0
+})
+_numberOfBonuses = 6
 _propSpritesWithWeights = Dictionary[Texture2D, float]({})
 _numberOfPropsPerChunk = 20
 metadata/_custom_type_script = "uid://d2ek2lhs3uda8"

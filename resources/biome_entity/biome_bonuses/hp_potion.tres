@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="BiomeBonus" load_steps=3 format=3 uid="uid://854fma386ut0"]
+
+[ext_resource type="Script" uid="uid://d10vaqoc62jaf" path="res://resources/biome_entity/biome_bonuses/biome_bonus.gd" id="1_fvqvi"]
+[ext_resource type="Texture2D" uid="uid://c3ryfsycrsc1a" path="res://assets/art/bonuses/healing_potion.png" id="2_tifoi"]
+
+[resource]
+script = ExtResource("1_fvqvi")
+bonusType = 3
+bonusValue = 20
+sprite = ExtResource("2_tifoi")
+metadata/_custom_type_script = "uid://d10vaqoc62jaf"

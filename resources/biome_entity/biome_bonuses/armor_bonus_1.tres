@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="BiomeBonus" load_steps=3 format=3 uid="uid://cudlsdxsda8c1"]
+
+[ext_resource type="Script" uid="uid://d10vaqoc62jaf" path="res://resources/biome_entity/biome_bonuses/biome_bonus.gd" id="1_agki1"]
+[ext_resource type="Texture2D" uid="uid://b14jmtno7lim6" path="res://assets/art/bonuses/armor_bonus1.png" id="2_wn05e"]
+
+[resource]
+script = ExtResource("1_agki1")
+bonusType = 1
+bonusValue = 2
+sprite = ExtResource("2_wn05e")
+metadata/_custom_type_script = "uid://d10vaqoc62jaf"

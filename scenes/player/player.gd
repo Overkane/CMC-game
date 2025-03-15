@@ -11,21 +11,23 @@ const _INITIAL_SPEED := (_MIN_SPEED + _MAX_SPEED) / 2
 @export var _baseStats: BaseStats
 @export var _levelingSystem: LevelingSystem
 
-var currentHP: int
+var maxHP: int:
+	set(value):
+		var oldMaxHP := maxHP
+		maxHP = value
+		if value > 0:
+			currentHP += maxHP - oldMaxHP
+var currentHP: int:
+	set(value):
+		currentHP = clamp(value, 0, maxHP)
 var currentDamage: int
 var currentArmor: int
+var currentSpeed := _INITIAL_SPEED
 var isDead := false
 var isMovementDisabled := false
 
-var _currentSpeed := _INITIAL_SPEED
 var _currentPathNumber := 3
 var _currentMoveAnimation := "walk"
-var _maxHP: int:
-	set(value):
-		var oldMaxHP := _maxHP
-		_maxHP = value
-		if value > 0:
-			currentHP += _maxHP - oldMaxHP
 
 @onready var camera: Camera2D = $Camera2D
 
@@ -35,7 +37,7 @@ func _ready() -> void:
 	_levelingSystem.levelUp.connect(_onLevelingSystem_levelUp)
 	EventBus.enemyDefeated.connect(_onEnemyDefeated)
 
-	_maxHP = _baseStats.maxHP
+	maxHP = _baseStats.maxHP
 	currentDamage = _baseStats.damage
 	currentArmor = _baseStats.armor
 
@@ -55,10 +57,18 @@ func changeHP(value: int) -> void:
 		await $AnimatedSprite2D.animation_finished
 		died.emit()
 
+func changeDamage(value: int) -> void:
+	currentDamage += value
+	_updatePlayerStatsUI()
+
+func changeArmor(value: int) -> void:
+	currentArmor += value
+	_updatePlayerStatsUI()
+
 func changeSpeed(value: int) -> void:
-	_currentSpeed += value
+	currentSpeed += value
 	@warning_ignore("integer_division")
-	if _currentSpeed >= (_INITIAL_SPEED + _MAX_SPEED) / 2:
+	if currentSpeed >= (_INITIAL_SPEED + _MAX_SPEED) / 2:
 		_currentMoveAnimation = "run"
 	else:
 		_currentMoveAnimation = "walk"
@@ -70,7 +80,7 @@ func changeAnimation(animationName: String) -> void:
 
 func _applyMovement(delta: float) -> void:
 	# Base horizontal movement
-	global_position += Vector2.RIGHT * _currentSpeed * delta
+	global_position += Vector2.RIGHT * currentSpeed * delta
 
 	# Vertical movement
 	var verticalVector := Vector2.ZERO
@@ -83,7 +93,7 @@ func _applyMovement(delta: float) -> void:
 	global_position += verticalVector * GameConstants.DISTANCE_BETWEEN_PATHES
 
 func _updatePlayerStatsUI() -> void:
-	%HPLabel.text = "%s/%s" % [currentHP, _maxHP]
+	%HPLabel.text = "%s/%s" % [currentHP, maxHP]
 	%DamageLabel.text = str(currentDamage)
 	%ArmorLabel.text = str(currentArmor)
 	EventBus.playerStatsChanged.emit()
@@ -93,7 +103,7 @@ func _onAreaEntered(body: Node2D) -> void:
 	assert(body.has_method("interact"), str(body) + " doesn't have 'interact()' method.")
 	body.interact()
 
-	if not isDead:
+	if not isDead and body is Enemy:
 		var attackVariant := randi_range(1, 3)
 		$AnimatedSprite2D.play("attack%s" % attackVariant)
 		await $AnimatedSprite2D.animation_finished
@@ -108,7 +118,7 @@ func _onLevelingSystem_levelUp(currentLevel: int) -> void:
 	var levelForStatIncrease := currentLevel - 1
 	# Reduced value for max hp increase, cuz otherwise it would be too strong.
 	@warning_ignore("integer_division")
-	_maxHP += levelForStatIncrease * _baseStats.maxHP / 10
+	maxHP += levelForStatIncrease * _baseStats.maxHP / 10
 	currentDamage += levelForStatIncrease * _baseStats.damage
 	currentArmor += levelForStatIncrease * _baseStats.armor
 	_updatePlayerStatsUI()
