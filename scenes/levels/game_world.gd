@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 
 const _INITIAL_PATH_OFFSET := 200.0
 const _END_PATH_OFFSET := 150.0
@@ -49,7 +49,7 @@ func _input(event: InputEvent) -> void:
 
 func _generateBiomes() -> void:
 	var horizontalSizePerChunk := _roadTileMapLayer.get_viewport_rect().size.x
-	var biomeDistanceShift := 0
+	var biomeDistanceShift := 0.0
 
 	for biome in _BIOMES: # Biome shift X
 		# Tile generation
@@ -59,10 +59,41 @@ func _generateBiomes() -> void:
 			var patternPosition := Vector2(i * horizontalSizePerChunk + biomeDistanceShift, 0)
 			_roadTileMapLayer.set_pattern(_roadTileMapLayer.local_to_map(patternPosition), biomeTilePattern)
 
+			# Props generation
+			var topPosition := patternPosition
+			var topSize := Vector2(horizontalSizePerChunk, 65)
+			var debugTopColorRect := ColorRect.new()
+			debugTopColorRect.position = topPosition
+			debugTopColorRect.size = topSize # TODO remove hardcode
+			if Debugger.DEBUG_IS_ACTIVE:
+				add_child(debugTopColorRect)
+
+			var botPosition := patternPosition - (Vector2(0, -6.5 * GameConstants.DISTANCE_BETWEEN_PATHES))
+			var botSize := Vector2(horizontalSizePerChunk, 65)
+			var debugBotColorRect = ColorRect.new()
+			debugBotColorRect.position = botPosition
+			debugBotColorRect.size = botSize
+			if Debugger.DEBUG_IS_ACTIVE:
+				add_child(debugBotColorRect)
+
+			var biomeProps = biome.generateBiomeProps()
+			for biomeProp in biomeProps:
+				var chosenSide: ColorRect
+				match randi_range(0, 1):
+					0: chosenSide = debugTopColorRect
+					1: chosenSide = debugBotColorRect
+
+				var propSprite := Sprite2D.new()
+				propSprite.texture = biomeProp
+				propSprite.global_position = Vector2(
+					randf_range(chosenSide.global_position.x, chosenSide.global_position.x + chosenSide.size.x),
+					randf_range(chosenSide.global_position.y, chosenSide.global_position.y + chosenSide.size.y))
+				add_child(propSprite)
+
 		# Interactibles generation
 		var fullBiomeDistance := horizontalSizePerChunk * biome.numberOfChunks
 		for i in GameConstants.NUMBER_OF_PATHES:
-			var generatedBiome: Array[BiomeEntity] = biome.generateBiome()
+			var generatedBiome: Array = biome.generateBiome()
 
 			var addOffset := true # TODO, offset should be only for the first biome
 			var biomeEntityPosition := Vector2(biomeDistanceShift, GameConstants.FIRST_PATH_Y_COORD + i * GameConstants.DISTANCE_BETWEEN_PATHES)
@@ -78,25 +109,25 @@ func _generateBiomes() -> void:
 				push_error("Distance for 1 entity is less than minimal distance.")
 
 			var distanceRemainder := 0.0
-			for biomeEntity in generatedBiome:
+			for biomeEntityInfo in generatedBiome:
 				var positionChange := randf_range(_MINIMAL_DISTANCE_BETWEEN_BIOME_ENTITIES, distanceForOneEntity + distanceRemainder)
 				biomeEntityPosition.x += positionChange
 
-				var biomeEntityObject = _ENEMY_SCENE.instantiate()
-				if biomeEntity is BiomeBonus:
-					biomeEntityObject = _BONUS_SCENE.instantiate()
-				elif biomeEntity is BiomeObstacle:
-					biomeEntityObject = _OBSTACLE_SCENE.instantiate()
-				biomeEntityObject.setup(biomeEntity, biomeEntityPosition)
-				add_child(biomeEntityObject)
+				var biomeEntity := _ENEMY_SCENE.instantiate()
+				if biomeEntityInfo is BiomeBonus:
+					biomeEntity = _BONUS_SCENE.instantiate()
+				elif biomeEntityInfo is BiomeObstacle:
+					biomeEntity = _OBSTACLE_SCENE.instantiate()
+				biomeEntity.setup(biomeEntityInfo, biomeEntityPosition)
+				add_child(biomeEntity)
 
 				distanceRemainder = distanceForOneEntity + distanceRemainder - positionChange
 
 			# Spawn boss
 			var bossPosition := Vector2(fullBiomeDistance + biomeDistanceShift, biomeEntityPosition.y)
-			var biomeEntityObject := _ENEMY_SCENE.instantiate()
-			biomeEntityObject.setup(biome.boss, bossPosition)
-			add_child(biomeEntityObject)
+			var bossEntity := _ENEMY_SCENE.instantiate()
+			bossEntity.setup(biome.boss, bossPosition)
+			add_child(bossEntity)
 
 		biomeDistanceShift += fullBiomeDistance
 

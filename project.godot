@@ -41,6 +41,7 @@ buses/default_bus_layout="res://resources/default_bus_layout.tres"
 
 GameConstants="*res://autoloads/game_constants.gd"
 EventBus="*res://autoloads/event_bus.gd"
+Debugger="*res://autoloads/debugger.gd"
 
 [debug]
 

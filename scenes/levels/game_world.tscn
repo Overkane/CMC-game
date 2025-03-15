@@ -1,8 +1,55 @@
-[gd_scene load_steps=8 format=4 uid="uid://qvkd8kte8h62"]
+[gd_scene load_steps=10 format=4 uid="uid://qvkd8kte8h62"]
 
 [ext_resource type="Script" uid="uid://cx3xmev5fl5tf" path="res://scenes/levels/game_world.gd" id="1_hyc8p"]
 [ext_resource type="TileSet" uid="uid://h7n345jie2jq" path="res://resources/game_world_tileset.tres" id="2_4r7d4"]
+[ext_resource type="Script" uid="uid://cgjljwqr8u107" path="res://resources/base_stats/base_stats.gd" id="4_7y55x"]
 [ext_resource type="PackedScene" uid="uid://bc6ovnknimcn5" path="res://scenes/player/player.tscn" id="4_b3nq0"]
+
+[sub_resource type="Resource" id="Resource_7y55x"]
+resource_local_to_scene = true
+script = ExtResource("4_7y55x")
+maxHP = 100
+armor = 1
+damage = 4
+metadata/_custom_type_script = "uid://cgjljwqr8u107"
+
+[sub_resource type="Animation" id="Animation_7y55x"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/ColorRect:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Player:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-40, 193)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Player")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"values": []
+}
 
 [sub_resource type="Animation" id="Animation_4r7d4"]
 resource_name = "main_menu_transition"
@@ -49,44 +96,6 @@ tracks/2/keys = {
 }]
 }
 
-[sub_resource type="Animation" id="Animation_7y55x"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CanvasLayer/ColorRect:self_modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Player:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-40, 193)]
-}
-tracks/2/type = "method"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Player")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(),
-"transitions": PackedFloat32Array(),
-"values": []
-}
-
 [sub_resource type="Animation" id="Animation_hyc8p"]
 resource_name = "restart_transition"
 tracks/0/type = "value"
@@ -109,7 +118,8 @@ _data = {
 &"restart_transition": SubResource("Animation_hyc8p")
 }
 
-[node name="GameWorld" type="Node"]
+[node name="GameWorld" type="Node2D"]
+y_sort_enabled = true
 script = ExtResource("1_hyc8p")
 
 [node name="RoadTileMapLayer" type="TileMapLayer" parent="."]
@@ -119,6 +129,7 @@ tile_set = ExtResource("2_4r7d4")
 [node name="Player" parent="." instance=ExtResource("4_b3nq0")]
 unique_name_in_owner = true
 position = Vector2(-40, 193)
+_baseStats = SubResource("Resource_7y55x")
 
 [node name="StartGameHintText" type="RichTextLabel" parent="Player"]
 unique_name_in_owner = true
