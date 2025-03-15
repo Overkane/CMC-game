@@ -7,13 +7,13 @@
 [sub_resource type="Resource" id="Resource_ejlhq"]
 script = ExtResource("1_qljac")
 maxHP = 10
-currentHP = 10
-currentArmor = 0
-currentDamage = 1
+armor = 1
+damage = 1
 metadata/_custom_type_script = "uid://cgjljwqr8u107"
 
 [resource]
 script = ExtResource("1_es3bn")
 enemyStats = SubResource("Resource_ejlhq")
+enemyExp = 1
 sprite = ExtResource("2_es3bn")
 metadata/_custom_type_script = "uid://b2xccu6kwv00o"

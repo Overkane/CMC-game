@@ -3,7 +3,7 @@ class_name Enemy
 
 var _baseStats: BaseStats
 var _damageToThePlayer: int
-
+var _enemyExp: int
 
 func setup(biomeEntity: BiomeEnemy, biomeEntityPosition: Vector2) -> void:
 	EventBus.playerStatsChanged.connect(_updateTotalDamageToThePlayer)
@@ -12,9 +12,11 @@ func setup(biomeEntity: BiomeEnemy, biomeEntityPosition: Vector2) -> void:
 	_baseStats = biomeEntity.enemyStats
 	global_position = biomeEntityPosition
 
-	%HPLabel.text = str(_baseStats.currentHP)
-	%DamageLabel.text = str(_baseStats.currentDamage)
-	%ArmorLabel.text = str(_baseStats.currentArmor)
+	_enemyExp = biomeEntity.enemyExp
+
+	%HPLabel.text = str(_baseStats.maxHP)
+	%DamageLabel.text = str(_baseStats.damage)
+	%ArmorLabel.text = str(_baseStats.armor)
 	_updateTotalDamageToThePlayer()
 
 func interact() -> void:
@@ -28,21 +30,20 @@ func _updateTotalDamageToThePlayer() -> void:
 	%DamageToPlayerLabel.text = str(_damageToThePlayer)
 
 func _calculatePlayerHPAfterBattle() -> int:
-	var playerStats: BaseStats = GameConstants.player._baseStats
-
-	var playerHP := playerStats.currentHP
-	var enemyHP := _baseStats.currentHP
+	var playerHP: int = GameConstants.player.currentHP
+	var enemyHP := _baseStats.maxHP
 
 	while true:
-		enemyHP -= max(playerStats.currentDamage - _baseStats.currentArmor, 1)
+		enemyHP -= max(GameConstants.player.currentDamage - _baseStats.armor, 1)
 		if enemyHP <= 0:
 			break
 
-		playerHP -= max(_baseStats.currentDamage - playerStats.currentArmor, 1)
+		playerHP -= max(_baseStats.damage - GameConstants.player.currentArmor, 1)
 		if playerHP <= 0:
 			break
 
-	return playerStats.currentHP - playerHP
+	return GameConstants.player.currentHP - playerHP
 
 func _destroy() -> void:
+	EventBus.enemyDefeated.emit(_enemyExp)
 	queue_free()

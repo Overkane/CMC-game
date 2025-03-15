@@ -1,29 +1,30 @@
-[gd_scene load_steps=9 format=3 uid="uid://bc6ovnknimcn5"]
+[gd_scene load_steps=10 format=3 uid="uid://bc6ovnknimcn5"]
 
 [ext_resource type="Script" uid="uid://cksapot0t6r7m" path="res://scenes/player/player.gd" id="1_dovo2"]
-[ext_resource type="Script" uid="uid://cgjljwqr8u107" path="res://resources/base_stats/base_stats.gd" id="2_gmlin"]
+[ext_resource type="Script" uid="uid://cgjljwqr8u107" path="res://resources/base_stats/base_stats.gd" id="2_0owmy"]
 [ext_resource type="SpriteFrames" uid="uid://bcrf5xh8ssayo" path="res://resources/player_animations.tres" id="3_75vfm"]
 [ext_resource type="Texture2D" uid="uid://cbyivm5u65p5m" path="res://assets/art/icons/heart_icon.png" id="4_0owmy"]
+[ext_resource type="Script" uid="uid://c8gt7wn7eq2wk" path="res://scenes/player/leveling_system.gd" id="4_qek5x"]
 [ext_resource type="Texture2D" uid="uid://ctiroj6p3w3pu" path="res://assets/art/icons/sword_icon.png" id="5_qek5x"]
 [ext_resource type="Texture2D" uid="uid://d37icpms0tda4" path="res://assets/art/icons/shield_icon.png" id="6_5gtgg"]
 
-[sub_resource type="Resource" id="Resource_lvxji"]
-resource_local_to_scene = true
-script = ExtResource("2_gmlin")
+[sub_resource type="Resource" id="Resource_0owmy"]
+script = ExtResource("2_0owmy")
 maxHP = 100
-currentArmor = 1
-currentDamage = 4
+armor = 1
+damage = 4
 metadata/_custom_type_script = "uid://cgjljwqr8u107"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dovo2"]
 size = Vector2(22, 34)
 
-[node name="Player" type="Area2D"]
+[node name="Player" type="Area2D" node_paths=PackedStringArray("_levelingSystem")]
 collision_layer = 0
 collision_mask = 2
 monitorable = false
 script = ExtResource("1_dovo2")
-_baseStats = SubResource("Resource_lvxji")
+_baseStats = SubResource("Resource_0owmy")
+_levelingSystem = NodePath("LevelingSystem")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, -9)
@@ -33,7 +34,7 @@ shape = SubResource("RectangleShape2D_dovo2")
 sprite_frames = ExtResource("3_75vfm")
 animation = &"idle"
 autoplay = "walk"
-frame_progress = 0.603348
+frame_progress = 0.670659
 offset = Vector2(0, -8)
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -43,16 +44,19 @@ drag_vertical_enabled = true
 drag_top_margin = 1.0
 drag_bottom_margin = 1.0
 
+[node name="LevelingSystem" type="Node" parent="."]
+script = ExtResource("4_qek5x")
+
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -26.0
-offset_top = -24.0
-offset_right = 2.0
-offset_bottom = 35.0
+offset_left = -42.0
+offset_top = -20.0
+offset_right = 18.0
+offset_bottom = 39.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.5, 0.5)
@@ -64,7 +68,7 @@ alignment = 2
 [node name="HPLabel" type="Label" parent="VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "1"
+text = "10/100"
 
 [node name="HPIcon" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
