@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="BiomeObstacle" load_steps=3 format=3 uid="uid://dnl2wfxtx4pmo"]
+
+[ext_resource type="Script" uid="uid://cx5rm5tkpr7hh" path="res://resources/biome_entity/biome_obstacles/biome_obstacle.gd" id="1_doqkd"]
+[ext_resource type="Texture2D" uid="uid://d2xu246m4lbb2" path="res://assets/art/obstacles/Fire_Trap.png" id="2_doqkd"]
+
+[resource]
+script = ExtResource("1_doqkd")
+damage = 20
+numberOfHorizontalFrames = 14
+sprite = ExtResource("2_doqkd")
+metadata/_custom_type_script = "uid://cx5rm5tkpr7hh"

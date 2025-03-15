@@ -8,8 +8,9 @@ const _BONUS_SCENE: PackedScene = preload("res://scenes/interactibles/bonus/bonu
 const _OBSTACLE_SCENE: PackedScene = preload("res://scenes/interactibles/obstacle/obstacle.tscn")
 const _BIOMES: Array[Biome] = [
 	preload("res://resources/biomes/forest_biome.tres"),
-	preload("res://resources/biomes/desert_biome.tres"),
+	preload("res://resources/biomes/savanna_biome.tres"),
 	preload("res://resources/biomes/snow_biome.tres"),
+	preload("res://resources/biomes/dragon_lair_biome.tres"),
 ]
 
 var isIntro := true
@@ -70,13 +71,13 @@ func _generateBiomes() -> void:
 
 			var botPosition := patternPosition - (Vector2(0, -6.5 * GameConstants.DISTANCE_BETWEEN_PATHES))
 			var botSize := Vector2(horizontalSizePerChunk, 65)
-			var debugBotColorRect = ColorRect.new()
+			var debugBotColorRect := ColorRect.new()
 			debugBotColorRect.position = botPosition
 			debugBotColorRect.size = botSize
 			if Debugger.DEBUG_IS_ACTIVE:
 				add_child(debugBotColorRect)
 
-			var biomeProps = biome.generateBiomeProps()
+			var biomeProps := biome.generateBiomeProps()
 			for biomeProp in biomeProps:
 				var chosenSide: ColorRect
 				match randi_range(0, 1):

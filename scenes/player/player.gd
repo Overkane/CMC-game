@@ -22,7 +22,7 @@ var _currentPathNumber := 3
 var _currentMoveAnimation := "walk"
 var _maxHP: int:
 	set(value):
-		var oldMaxHP = _maxHP
+		var oldMaxHP := _maxHP
 		_maxHP = value
 		if value > 0:
 			currentHP += _maxHP - oldMaxHP
@@ -105,7 +105,7 @@ func _onEnemyDefeated(expGained: int) -> void:
 	_levelingSystem.increaseExp(expGained)
 
 func _onLevelingSystem_levelUp(currentLevel: int) -> void:
-	var levelForStatIncrease = currentLevel - 1
+	var levelForStatIncrease := currentLevel - 1
 	# Reduced value for max hp increase, cuz otherwise it would be too strong.
 	@warning_ignore("integer_division")
 	_maxHP += levelForStatIncrease * _baseStats.maxHP / 10

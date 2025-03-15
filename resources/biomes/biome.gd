@@ -2,7 +2,7 @@ extends Resource
 class_name Biome
 
 # Chosen tileset depends on biome type, so it should be in corresponding order with tileset patterns.
-enum BiomeType { FOREST, DESERT, SNOW }
+enum BiomeType { FOREST, SAVANNA, SNOW }
 enum EntityType { ENEMY, OBSTACLE, BONUS, PROP }
 
 @export var biomeType: BiomeType
@@ -28,12 +28,13 @@ func generateBiome() -> Array:
 	var generatedBiome: Array
 
 	if not _enemyListWithWeights.is_empty():
-		generatedBiome = _generatedEntityListBasedOnWeight(EntityType.ENEMY, _enemyListWithWeights, _numberOfEnemies)
+		generatedBiome.append_array(_generatedEntityListBasedOnWeight(EntityType.ENEMY, _enemyListWithWeights, _numberOfEnemies))
 	if not _bonusListWithWeights.is_empty():
-		generatedBiome = _generatedEntityListBasedOnWeight(EntityType.BONUS, _bonusListWithWeights, _numberOfBonuses)
+		generatedBiome.append_array(_generatedEntityListBasedOnWeight(EntityType.BONUS, _bonusListWithWeights, _numberOfBonuses))
 	if not _obstacleListWithWeights.is_empty():
-		generatedBiome = _generatedEntityListBasedOnWeight(EntityType.OBSTACLE, _obstacleListWithWeights, _numberOfObstacles)
+		generatedBiome.append_array(_generatedEntityListBasedOnWeight(EntityType.OBSTACLE, _obstacleListWithWeights, _numberOfObstacles))
 
+	generatedBiome.shuffle()
 	return generatedBiome
 
 func generateBiomeProps() -> Array:
@@ -57,7 +58,7 @@ func _generatedEntityListBasedOnWeight(entityType: EntityType, entityListWithWei
 		totalWeight = _entityWeights[entityType]
 
 	for i in numberOfEntities:
-		var chosenWeight = randf_range(0, totalWeight)
+		var chosenWeight := randf_range(0, totalWeight)
 		for entity in entityListWithWeights:
 			chosenWeight -= entityListWithWeights[entity]
 			if chosenWeight <= 0:

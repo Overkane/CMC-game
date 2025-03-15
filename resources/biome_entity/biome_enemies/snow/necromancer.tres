@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="BiomeEnemy" load_steps=5 format=3 uid="uid://ds0bgmljc5wpw"]
+
+[ext_resource type="Script" uid="uid://cgjljwqr8u107" path="res://resources/base_stats/base_stats.gd" id="1_wepc3"]
+[ext_resource type="Script" uid="uid://b2xccu6kwv00o" path="res://resources/biome_entity/biome_enemies/biome_enemy.gd" id="2_crdv1"]
+[ext_resource type="Texture2D" uid="uid://c3g7txvd1xbp8" path="res://assets/art/enemies/necromancer.png" id="3_wepc3"]
+
+[sub_resource type="Resource" id="Resource_ejlhq"]
+script = ExtResource("1_wepc3")
+maxHP = 10
+armor = 1
+damage = 1
+metadata/_custom_type_script = "uid://cgjljwqr8u107"
+
+[resource]
+script = ExtResource("2_crdv1")
+enemyStats = SubResource("Resource_ejlhq")
+enemyExp = 1
+sprite = ExtResource("3_wepc3")
+metadata/_custom_type_script = "uid://b2xccu6kwv00o"

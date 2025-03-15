@@ -1,27 +1,31 @@
-[gd_resource type="Resource" script_class="Biome" load_steps=9 format=3 uid="uid://btu8p2uaqgmik"]
+[gd_resource type="Resource" script_class="Biome" load_steps=10 format=3 uid="uid://btu8p2uaqgmik"]
 
 [ext_resource type="Script" uid="uid://d10vaqoc62jaf" path="res://resources/biome_entity/biome_bonuses/biome_bonus.gd" id="1_cabl0"]
 [ext_resource type="Script" uid="uid://d2ek2lhs3uda8" path="res://resources/biomes/biome.gd" id="1_xxwf7"]
 [ext_resource type="Script" uid="uid://b2xccu6kwv00o" path="res://resources/biome_entity/biome_enemies/biome_enemy.gd" id="2_xehji"]
-[ext_resource type="Resource" uid="uid://b7wb22e34cdqi" path="res://resources/biome_entity/biome_enemies/skeleton.tres" id="3_mhryn"]
+[ext_resource type="Resource" uid="uid://csdmfbxblloea" path="res://resources/biome_entity/biome_enemies/snow/ghoul.tres" id="3_02vlf"]
 [ext_resource type="Script" uid="uid://cx5rm5tkpr7hh" path="res://resources/biome_entity/biome_obstacles/biome_obstacle.gd" id="4_36kbx"]
-[ext_resource type="Texture2D" uid="uid://b8gol3b7ise2k" path="res://assets/art/props/snow_bush.png" id="5_36kbx"]
-[ext_resource type="Texture2D" uid="uid://dwc471g21eobm" path="res://assets/art/props/snow_bush2.png" id="6_02vlf"]
-[ext_resource type="Texture2D" uid="uid://b1qjliynej6ta" path="res://assets/art/props/snow_tree.png" id="8_qddrl"]
+[ext_resource type="Resource" uid="uid://ds0bgmljc5wpw" path="res://resources/biome_entity/biome_enemies/snow/necromancer.tres" id="4_qddrl"]
+[ext_resource type="Resource" uid="uid://28j3ji2xaavk" path="res://resources/biome_entity/biome_enemies/snow/skeleton.tres" id="5_qtj3m"]
+[ext_resource type="Resource" uid="uid://cp8qiiti5tujq" path="res://resources/biome_entity/biome_enemies/snow/zombie.tres" id="6_31dge"]
+[ext_resource type="Resource" uid="uid://d1lxppl4wqa4e" path="res://resources/biome_entity/biome_enemies/snow/death_knight.tres" id="8_4h1w0"]
 
 [resource]
 script = ExtResource("1_xxwf7")
 biomeType = 2
-numberOfChunks = 4
-boss = ExtResource("3_mhryn")
-enemyList = Array[ExtResource("2_xehji")]([ExtResource("3_mhryn")])
-numberOfEnemies = 8
-obstacleList = Array[ExtResource("4_36kbx")]([])
-numberOfObstacles = 8
-bonusList = Array[ExtResource("1_cabl0")]([])
-numberOfBonuses = 8
-treeSprites = Array[Texture2D]([ExtResource("8_qddrl")])
-maxNumberOfTressPerChunk = 4
-propSprites = Array[Texture2D]([ExtResource("5_36kbx"), ExtResource("6_02vlf")])
-maxNumberOfPropsPerChunk = 20
+numberOfChunks = 6
+boss = ExtResource("8_4h1w0")
+_enemyListWithWeights = Dictionary[ExtResource("2_xehji"), float]({
+ExtResource("3_02vlf"): 40.0,
+ExtResource("4_qddrl"): 20.0,
+ExtResource("5_qtj3m"): 80.0,
+ExtResource("6_31dge"): 70.0
+})
+_numberOfEnemies = 10
+_obstacleListWithWeights = Dictionary[ExtResource("4_36kbx"), float]({})
+_numberOfObstacles = 4
+_bonusListWithWeights = Dictionary[ExtResource("1_cabl0"), float]({})
+_numberOfBonuses = 4
+_propSpritesWithWeights = Dictionary[Texture2D, float]({})
+_numberOfPropsPerChunk = 20
 metadata/_custom_type_script = "uid://d2ek2lhs3uda8"

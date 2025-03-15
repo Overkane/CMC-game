@@ -6,9 +6,9 @@
 
 [sub_resource type="Resource" id="Resource_lwpa2"]
 script = ExtResource("1_lgoxc")
-maxHP = 100
-armor = 1
-damage = 1
+maxHP = 6
+armor = 0
+damage = 2
 metadata/_custom_type_script = "uid://cgjljwqr8u107"
 
 [resource]

@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="BiomeEnemy" load_steps=5 format=3 uid="uid://cteipl53ompcj"]
+
+[ext_resource type="Script" uid="uid://cgjljwqr8u107" path="res://resources/base_stats/base_stats.gd" id="1_cfepr"]
+[ext_resource type="Script" uid="uid://b2xccu6kwv00o" path="res://resources/biome_entity/biome_enemies/biome_enemy.gd" id="2_ahe3k"]
+[ext_resource type="Texture2D" uid="uid://o4inplfrdq38" path="res://assets/art/enemies/ogre.png" id="3_cfepr"]
+
+[sub_resource type="Resource" id="Resource_lwpa2"]
+script = ExtResource("1_cfepr")
+maxHP = 45
+armor = 5
+damage = 10
+metadata/_custom_type_script = "uid://cgjljwqr8u107"
+
+[resource]
+script = ExtResource("2_ahe3k")
+enemyStats = SubResource("Resource_lwpa2")
+enemyExp = 20
+sprite = ExtResource("3_cfepr")
+metadata/_custom_type_script = "uid://b2xccu6kwv00o"

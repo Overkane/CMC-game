@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="Biome" load_steps=7 format=3 uid="uid://cb4xy16josru1"]
+
+[ext_resource type="Script" uid="uid://d10vaqoc62jaf" path="res://resources/biome_entity/biome_bonuses/biome_bonus.gd" id="1_2cm1p"]
+[ext_resource type="Script" uid="uid://b2xccu6kwv00o" path="res://resources/biome_entity/biome_enemies/biome_enemy.gd" id="2_crrud"]
+[ext_resource type="Script" uid="uid://cx5rm5tkpr7hh" path="res://resources/biome_entity/biome_obstacles/biome_obstacle.gd" id="3_hghq6"]
+[ext_resource type="Resource" uid="uid://b3t35veqbkvhy" path="res://resources/biome_entity/biome_enemies/dragon_lair/dino.tres" id="4_2cm1p"]
+[ext_resource type="Resource" uid="uid://dnl2wfxtx4pmo" path="res://resources/biome_entity/biome_obstacles/fire_trap.tres" id="4_crrud"]
+[ext_resource type="Script" uid="uid://d2ek2lhs3uda8" path="res://resources/biomes/biome.gd" id="5_a5pgf"]
+
+[resource]
+script = ExtResource("5_a5pgf")
+biomeType = 2
+numberOfChunks = 1
+boss = ExtResource("4_2cm1p")
+_enemyListWithWeights = Dictionary[ExtResource("2_crrud"), float]({})
+_numberOfEnemies = 4
+_obstacleListWithWeights = Dictionary[ExtResource("3_hghq6"), float]({
+ExtResource("4_crrud"): 1.0
+})
+_numberOfObstacles = 20
+_bonusListWithWeights = Dictionary[ExtResource("1_2cm1p"), float]({})
+_numberOfBonuses = 4
+_propSpritesWithWeights = Dictionary[Texture2D, float]({})
+_numberOfPropsPerChunk = 20
+metadata/_custom_type_script = "uid://d2ek2lhs3uda8"

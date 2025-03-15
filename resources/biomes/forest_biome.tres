@@ -1,27 +1,39 @@
-[gd_resource type="Resource" script_class="Biome" load_steps=14 format=3 uid="uid://dt0y4n4l4vp2p"]
+[gd_resource type="Resource" script_class="Biome" load_steps=19 format=3 uid="uid://dt0y4n4l4vp2p"]
 
 [ext_resource type="Script" uid="uid://d10vaqoc62jaf" path="res://resources/biome_entity/biome_bonuses/biome_bonus.gd" id="1_pgsk4"]
 [ext_resource type="Script" uid="uid://b2xccu6kwv00o" path="res://resources/biome_entity/biome_enemies/biome_enemy.gd" id="2_ucqm8"]
-[ext_resource type="Resource" uid="uid://b7wb22e34cdqi" path="res://resources/biome_entity/biome_enemies/skeleton.tres" id="3_c1n6f"]
+[ext_resource type="Resource" uid="uid://cl0d37jrhbw6q" path="res://resources/biome_entity/biome_enemies/forest/boar.tres" id="3_3wabf"]
 [ext_resource type="Script" uid="uid://cx5rm5tkpr7hh" path="res://resources/biome_entity/biome_obstacles/biome_obstacle.gd" id="4_5yvjx"]
+[ext_resource type="Resource" uid="uid://d3ku7x6d273vd" path="res://resources/biome_entity/biome_enemies/forest/wolf.tres" id="4_yvdf3"]
+[ext_resource type="Resource" uid="uid://di8bm4j6ghley" path="res://resources/biome_entity/biome_enemies/forest/slime.tres" id="5_2k0xo"]
 [ext_resource type="Texture2D" uid="uid://cntbkxgv40gtf" path="res://assets/art/props/grass.png" id="5_birea"]
 [ext_resource type="Script" uid="uid://d2ek2lhs3uda8" path="res://resources/biomes/biome.gd" id="5_f4emr"]
 [ext_resource type="Texture2D" uid="uid://c7m407of4xsr3" path="res://assets/art/props/grass3.png" id="6_4yvxa"]
+[ext_resource type="Resource" uid="uid://dun7up1jpc21f" path="res://resources/biome_entity/biome_enemies/forest/big_slime.tres" id="6_pgvkn"]
 [ext_resource type="Texture2D" uid="uid://hv1fhm5mn4d0" path="res://assets/art/props/summer_bush.png" id="7_birea"]
 [ext_resource type="Texture2D" uid="uid://b0fwx1sqt5swn" path="res://assets/art/props/grass4.png" id="7_xba5i"]
 [ext_resource type="Texture2D" uid="uid://b41kpi44fwqiq" path="res://assets/art/props/small_rock.png" id="8_4yvxa"]
+[ext_resource type="Resource" uid="uid://b822pf2tfb1te" path="res://resources/biome_entity/biome_obstacles/bear_trap.tres" id="8_yvdf3"]
 [ext_resource type="Texture2D" uid="uid://bkp6favducgfy" path="res://assets/art/props/small_rock2.png" id="9_xba5i"]
 [ext_resource type="Texture2D" uid="uid://ebw8fmhtquyu" path="res://assets/art/props/big_rock.png" id="10_boj6u"]
 [ext_resource type="Texture2D" uid="uid://425kl6jp74bn" path="res://assets/art/props/summer_tree.png" id="12_3wabf"]
+[ext_resource type="Resource" uid="uid://cjrksamxju8nj" path="res://resources/biome_entity/biome_enemies/forest/bear.tres" id="16_dmmhh"]
 
 [resource]
 script = ExtResource("5_f4emr")
 biomeType = 0
-numberOfChunks = 4
-boss = ExtResource("3_c1n6f")
-_enemyListWithWeights = Dictionary[ExtResource("2_ucqm8"), float]({})
-_numberOfEnemies = 4
-_obstacleListWithWeights = Dictionary[ExtResource("4_5yvjx"), float]({})
+numberOfChunks = 6
+boss = ExtResource("16_dmmhh")
+_enemyListWithWeights = Dictionary[ExtResource("2_ucqm8"), float]({
+ExtResource("3_3wabf"): 40.0,
+ExtResource("4_yvdf3"): 20.0,
+ExtResource("5_2k0xo"): 60.0,
+ExtResource("6_pgvkn"): 10.0
+})
+_numberOfEnemies = 10
+_obstacleListWithWeights = Dictionary[ExtResource("4_5yvjx"), float]({
+ExtResource("8_yvdf3"): 1.0
+})
 _numberOfObstacles = 4
 _bonusListWithWeights = Dictionary[ExtResource("1_pgsk4"), float]({})
 _numberOfBonuses = 4
