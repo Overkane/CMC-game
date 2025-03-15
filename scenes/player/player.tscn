@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://d37icpms0tda4" path="res://assets/art/icons/shield_icon.png" id="6_5gtgg"]
 
 [sub_resource type="Resource" id="Resource_lvxji"]
+resource_local_to_scene = true
 script = ExtResource("2_gmlin")
 maxHP = 20
 currentHP = 20
@@ -31,12 +32,14 @@ shape = SubResource("RectangleShape2D_dovo2")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("3_75vfm")
-animation = &"walk"
+animation = &"idle"
 autoplay = "walk"
+frame_progress = 0.603348
 offset = Vector2(0, -8)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(240, 0)
+enabled = false
 drag_vertical_enabled = true
 drag_top_margin = 1.0
 drag_bottom_margin = 1.0

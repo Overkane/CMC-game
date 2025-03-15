@@ -1,6 +1,8 @@
 extends Area2D
 class_name Player
 
+signal died
+
 const _MIN_SPEED = 50
 const _MAX_SPEED = _MIN_SPEED * 2
 const _INITIAL_SPEED = (_MIN_SPEED + _MAX_SPEED) / 2
@@ -8,11 +10,14 @@ const _INITIAL_SPEED = (_MIN_SPEED + _MAX_SPEED) / 2
 @export var _baseStats: BaseStats
 
 var isDead := false
+var isMovementDisabled := false
 
 var _currentSpeed := _INITIAL_SPEED
 @warning_ignore("narrowing_conversion")
 var _currentPathNumber: int = round(GameConstants.NUMBER_OF_PATHES / 2.0)
 var _currentMoveAnimation := "walk"
+
+@onready var camera: Camera2D = $Camera2D
 
 
 func _ready() -> void:
@@ -23,7 +28,7 @@ func _ready() -> void:
 	%ArmorLabel.text = str(_baseStats.currentArmor)
 
 func _physics_process(delta: float) -> void:
-	if not isDead:
+	if not isDead and not isMovementDisabled:
 		_applyMovement(delta)
 
 
@@ -34,7 +39,7 @@ func changeHP(value: int) -> void:
 		isDead = true
 		$AnimatedSprite2D.play("death")
 		await $AnimatedSprite2D.animation_finished
-		print("game end") # TODO lose condition
+		died.emit()
 
 func changeSpeed(value: int) -> void:
 	_currentSpeed += value
@@ -43,6 +48,9 @@ func changeSpeed(value: int) -> void:
 	else:
 		_currentMoveAnimation = "walk"
 	$AnimatedSprite2D.play(_currentMoveAnimation)
+
+func changeAnimation(animationName: String) -> void:
+	$AnimatedSprite2D.play(animationName)
 
 
 func _applyMovement(delta: float) -> void:

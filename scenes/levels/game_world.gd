@@ -12,12 +12,39 @@ const _BIOMES: Array[Biome] = [
 	preload("res://resources/biomes/snow_biome.tres"),
 ]
 
+var isIntro := true
+var isGameStarted := false
+var canRestartGame := false
+
 @onready var _roadTileMapLayer: TileMapLayer = $RoadTileMapLayer
 
 
 func _ready() -> void:
+	%Player.died.connect(_onPlayer_died)
+
 	GameConstants.player = %Player
+	GameConstants.player.isMovementDisabled = true
+	GameConstants.player.camera.enabled = false
 	_generateBiomes()
+
+	await $AnimationPlayer.animation_finished
+	isIntro = false
+	GameConstants.player.camera.enabled = true
+	$IntroCamera2D.enabled = false
+	%StartGameHintText.show()
+
+func _input(event: InputEvent) -> void:
+	if not isIntro and not isGameStarted and event is InputEventKey:
+		isGameStarted = true
+		%StartGameHintText.hide()
+		GameConstants.player.isMovementDisabled = false
+		GameConstants.player.changeAnimation("walk")
+	elif canRestartGame and event is InputEventKey:
+		canRestartGame = false
+		%RestartGameHintText.hide()
+		$AnimationPlayer.play("restart_transition")
+		await $AnimationPlayer.animation_finished
+		get_tree().reload_current_scene()
 
 
 func _generateBiomes() -> void:
@@ -72,3 +99,8 @@ func _generateBiomes() -> void:
 			add_child(biomeEntityObject)
 
 		biomeDistanceShift += fullBiomeDistance
+
+
+func _onPlayer_died() -> void:
+	%RestartGameHintText.show()
+	canRestartGame = true

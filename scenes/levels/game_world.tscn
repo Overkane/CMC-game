@@ -1,8 +1,113 @@
-[gd_scene load_steps=4 format=4 uid="uid://qvkd8kte8h62"]
+[gd_scene load_steps=8 format=4 uid="uid://qvkd8kte8h62"]
 
 [ext_resource type="Script" uid="uid://cx3xmev5fl5tf" path="res://scenes/levels/game_world.gd" id="1_hyc8p"]
 [ext_resource type="TileSet" uid="uid://h7n345jie2jq" path="res://resources/game_world_tileset.tres" id="2_4r7d4"]
 [ext_resource type="PackedScene" uid="uid://bc6ovnknimcn5" path="res://scenes/player/player.tscn" id="4_b3nq0"]
+
+[sub_resource type="Animation" id="Animation_4r7d4"]
+resource_name = "main_menu_transition"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/ColorRect:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Player:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-40, 193), Vector2(80, 193)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Player")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1, 2),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": ["run"],
+"method": &"changeAnimation"
+}, {
+"args": ["idle"],
+"method": &"changeAnimation"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_7y55x"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/ColorRect:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Player:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-40, 193)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Player")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"values": []
+}
+
+[sub_resource type="Animation" id="Animation_hyc8p"]
+resource_name = "restart_transition"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/ColorRect:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hyc8p"]
+_data = {
+&"RESET": SubResource("Animation_7y55x"),
+&"main_menu_transition": SubResource("Animation_4r7d4"),
+&"restart_transition": SubResource("Animation_hyc8p")
+}
 
 [node name="GameWorld" type="Node"]
 script = ExtResource("1_hyc8p")
@@ -13,4 +118,60 @@ tile_set = ExtResource("2_4r7d4")
 
 [node name="Player" parent="." instance=ExtResource("4_b3nq0")]
 unique_name_in_owner = true
-position = Vector2(80, 193)
+position = Vector2(-40, 193)
+
+[node name="StartGameHintText" type="RichTextLabel" parent="Player"]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -72.0
+offset_top = -41.0
+offset_right = 208.0
+offset_bottom = -32.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "[pulse freq=1.0 color=#ffffff40 ease=-2.0]Press any button to start[/pulse]"
+
+[node name="RestartGameHintText" type="RichTextLabel" parent="Player"]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -72.0
+offset_top = -41.0
+offset_right = 208.0
+offset_bottom = -32.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "[pulse freq=1.0 color=#ffffff40 ease=-2.0]Press any button to restart[/pulse]"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_hyc8p")
+}
+autoplay = "main_menu_transition"
+
+[node name="IntroCamera2D" type="Camera2D" parent="."]
+position = Vector2(320, 193)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+self_modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+color = Color(0, 0, 0, 1)
