@@ -1,9 +1,22 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://b7443jj0kv7ai"]
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://b7443jj0kv7ai"]
 
 [ext_resource type="FontFile" uid="uid://hsgt22g1xqbn" path="res://assets/fonts/Sixtyfour/Sixtyfour-Regular-VariableFont_BLED,SCAN.ttf" id="1_ntlge"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ocbwa"]
+bg_color = Color(0.854902, 0.745098, 0.537255, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ntlge"]
+bg_color = Color(0.854902, 0.745098, 0.537255, 1)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_mfept"]
+color = Color(0.635294, 0.470588, 0.415686, 1)
+thickness = 4
+
 [resource]
 default_font = ExtResource("1_ntlge")
+HSlider/styles/grabber_area = SubResource("StyleBoxFlat_ocbwa")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_ntlge")
+HSlider/styles/slider = SubResource("StyleBoxLine_mfept")
 RichTextLabel/constants/line_separation = 2
 RichTextLabel/constants/outline_size = 5
 RichTextLabel/font_sizes/bold_font_size = 8
