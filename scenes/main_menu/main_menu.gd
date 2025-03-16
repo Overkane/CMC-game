@@ -31,12 +31,14 @@ func _ready() -> void:
 	%MusicSlider.value_changed.connect(_onMusicSlider_valueChanged)
 	%SFXSlider.value_changed.connect(_onSFXSlider_valueChanged)
 
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	%OptionsButton.call_deferred("grab_focus")
 
 	_setDefaultAudioSettings()
 
 func _input(event: InputEvent) -> void:
+	if Input.mouse_mode != Input.MOUSE_MODE_CAPTURED and event is InputEventMouseButton:
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+
 	if %PlayerSprite.visible:
 		_movePlayerSprite(event)
 
