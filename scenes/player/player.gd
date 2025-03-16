@@ -4,9 +4,10 @@ class_name Player
 signal died
 
 const _MIN_SPEED := 50
-const _MAX_SPEED := _MIN_SPEED * 2
+const _MAX_SPEED := _MIN_SPEED * 4
 @warning_ignore("integer_division")
 const _INITIAL_SPEED := (_MIN_SPEED + _MAX_SPEED) / 2
+const _SPEED_INCREASE_PER_SECOND := 1
 
 @export var _baseStats: BaseStats
 @export var _levelingSystem: LevelingSystem
@@ -20,20 +21,54 @@ var maxHP: int:
 var currentHP: int:
 	set(value):
 		currentHP = clamp(value, 0, maxHP)
-var currentDamage: int
-var currentArmor: int
-var currentSpeed := _INITIAL_SPEED
+var currentDamage: int:
+	get():
+		return currentDamage * _speedStatModifier
+var currentArmor: int:
+	get():
+		return currentArmor * _speedStatModifier
+var currentSpeed := _INITIAL_SPEED:
+	set(value):
+		currentSpeed = clamp(value, _MIN_SPEED, _MAX_SPEED)
+		# High speed, positive bonus to stats.
+		if currentSpeed >= (_INITIAL_SPEED + _MAX_SPEED) / 2:
+			_speedStatModifier = 1.5
+			%SpeedIconMinus.hide()
+			%SpeedIcon.hide()
+			%SpeedIconPlus.show()
+		# Slow speed, negative bonus to stats.
+		elif currentSpeed <= (_INITIAL_SPEED + _MIN_SPEED) / 2:
+			_speedStatModifier = 0.5
+			%SpeedIconMinus.show()
+			%SpeedIcon.hide()
+			%SpeedIconPlus.hide()
+		else:
+			_speedStatModifier = 1
+			%SpeedIconMinus.hide()
+			%SpeedIcon.show()
+			%SpeedIconPlus.hide()
 var isDead := false
 var isMovementDisabled := false
 
 var _currentPathNumber := 3
 var _currentMoveAnimation := "walk"
+var _speedStatModifier := 1.0:
+	set(value):
+		var oldSpeedModifier = _speedStatModifier
+		_speedStatModifier = value
+		if _speedStatModifier != oldSpeedModifier:
+			# Trigger stat setters to recalculate with new speed modifier
+			_updatePlayerStatsUI()
 
 @onready var camera: Camera2D = $Camera2D
 
 
 func _ready() -> void:
 	area_entered.connect(_onAreaEntered)
+	$SpeedTimer.timeout.connect(func():
+		if not isDead and not isMovementDisabled:
+			changeSpeed(_SPEED_INCREASE_PER_SECOND)
+		$SpeedTimer.start())
 	_levelingSystem.levelUp.connect(_onLevelingSystem_levelUp)
 	EventBus.enemyDefeated.connect(_onEnemyDefeated)
 
@@ -42,6 +77,7 @@ func _ready() -> void:
 	currentArmor = _baseStats.armor
 
 	_updatePlayerStatsUI()
+	$SpeedTimer.start()
 
 func _physics_process(delta: float) -> void:
 	if not isDead and not isMovementDisabled:
@@ -50,6 +86,11 @@ func _physics_process(delta: float) -> void:
 
 func changeHP(value: int) -> void:
 	currentHP += value
+
+	# On taking damage you slow down based on damage.
+	if value < 0:
+		currentSpeed += value
+
 	_updatePlayerStatsUI()
 	if currentHP <= 0:
 		isDead = true
@@ -67,12 +108,14 @@ func changeArmor(value: int) -> void:
 
 func changeSpeed(value: int) -> void:
 	currentSpeed += value
+
 	@warning_ignore("integer_division")
 	if currentSpeed >= (_INITIAL_SPEED + _MAX_SPEED) / 2:
 		_currentMoveAnimation = "run"
 	else:
 		_currentMoveAnimation = "walk"
 	$AnimatedSprite2D.play(_currentMoveAnimation)
+	_updatePlayerStatsUI()
 
 func changeAnimation(animationName: String) -> void:
 	$AnimatedSprite2D.play(animationName)
@@ -96,6 +139,7 @@ func _updatePlayerStatsUI() -> void:
 	%HPLabel.text = "%s/%s" % [currentHP, maxHP]
 	%DamageLabel.text = str(currentDamage)
 	%ArmorLabel.text = str(currentArmor)
+	%SpeedLabel.text = str(currentSpeed)
 	EventBus.playerStatsChanged.emit()
 
 

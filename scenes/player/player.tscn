@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bc6ovnknimcn5"]
+[gd_scene load_steps=13 format=3 uid="uid://bc6ovnknimcn5"]
 
 [ext_resource type="Script" uid="uid://cksapot0t6r7m" path="res://scenes/player/player.gd" id="1_dovo2"]
 [ext_resource type="Script" uid="uid://cgjljwqr8u107" path="res://resources/base_stats/base_stats.gd" id="2_0owmy"]
@@ -7,6 +7,9 @@
 [ext_resource type="Script" uid="uid://c8gt7wn7eq2wk" path="res://scenes/player/leveling_system.gd" id="4_qek5x"]
 [ext_resource type="Texture2D" uid="uid://ctiroj6p3w3pu" path="res://assets/art/icons/sword_icon.png" id="5_qek5x"]
 [ext_resource type="Texture2D" uid="uid://d37icpms0tda4" path="res://assets/art/icons/shield_icon.png" id="6_5gtgg"]
+[ext_resource type="Texture2D" uid="uid://deirsimgsd4wd" path="res://assets/art/icons/speed_icon_plus.png" id="8_h17s1"]
+[ext_resource type="Texture2D" uid="uid://do2e4g86iuj2e" path="res://assets/art/icons/speed_icon.png" id="9_je7p5"]
+[ext_resource type="Texture2D" uid="uid://cnb01punym0cj" path="res://assets/art/icons/speed_icon_minus.png" id="10_fm80t"]
 
 [sub_resource type="Resource" id="Resource_0owmy"]
 script = ExtResource("2_0owmy")
@@ -102,3 +105,34 @@ text = "1"
 layout_mode = 2
 texture = ExtResource("6_5gtgg")
 expand_mode = 2
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="SpeedLabel" type="Label" parent="VBoxContainer/HBoxContainer4"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "1"
+
+[node name="SpeedIconPlus" type="TextureRect" parent="VBoxContainer/HBoxContainer4"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+texture = ExtResource("8_h17s1")
+expand_mode = 2
+
+[node name="SpeedIcon" type="TextureRect" parent="VBoxContainer/HBoxContainer4"]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("9_je7p5")
+expand_mode = 2
+
+[node name="SpeedIconMinus" type="TextureRect" parent="VBoxContainer/HBoxContainer4"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+texture = ExtResource("10_fm80t")
+expand_mode = 2
+
+[node name="SpeedTimer" type="Timer" parent="."]
