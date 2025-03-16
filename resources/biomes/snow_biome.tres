@@ -11,11 +11,11 @@
 [ext_resource type="Resource" uid="uid://ds0bgmljc5wpw" path="res://resources/biome_entity/biome_enemies/snow/necromancer.tres" id="4_qddrl"]
 [ext_resource type="Resource" uid="uid://vi1fhcp5xx2l" path="res://resources/biome_entity/biome_bonuses/speed_bonus_1.tres" id="5_65pmf"]
 [ext_resource type="Resource" uid="uid://28j3ji2xaavk" path="res://resources/biome_entity/biome_enemies/snow/skeleton.tres" id="5_qtj3m"]
+[ext_resource type="Resource" uid="uid://cp8qiiti5tujq" path="res://resources/biome_entity/biome_enemies/snow/zombie.tres" id="6_31dge"]
 [ext_resource type="Resource" uid="uid://djcjyqaeuc82u" path="res://resources/biome_entity/biome_bonuses/damage_bonus_3.tres" id="6_dkib7"]
 [ext_resource type="Resource" uid="uid://b8sf21n7aon84" path="res://resources/biome_entity/biome_bonuses/armor_bonus_2.tres" id="7_1h5x5"]
 [ext_resource type="Resource" uid="uid://d1lxppl4wqa4e" path="res://resources/biome_entity/biome_enemies/snow/death_knight.tres" id="8_4h1w0"]
 [ext_resource type="Resource" uid="uid://pdnqpbxhq0w7" path="res://resources/biome_entity/biome_bonuses/speed_bonus_2.tres" id="8_rqx8m"]
-[ext_resource type="Resource" path="8" id="13_gfk30"]
 [ext_resource type="Texture2D" uid="uid://dwc471g21eobm" path="res://assets/art/props/snow_bush2.png" id="15_gfk30"]
 [ext_resource type="Texture2D" uid="uid://b8gol3b7ise2k" path="res://assets/art/props/snow_bush.png" id="16_pvfxw"]
 [ext_resource type="Texture2D" uid="uid://b1qjliynej6ta" path="res://assets/art/props/snow_tree.png" id="17_rx4u8"]
@@ -33,7 +33,7 @@ _enemyListWithWeights = Dictionary[ExtResource("2_xehji"), float]({
 ExtResource("3_02vlf"): 40.0,
 ExtResource("4_qddrl"): 20.0,
 ExtResource("5_qtj3m"): 80.0,
-ExtResource("13_gfk30"): 70.0
+ExtResource("6_31dge"): 70.0
 })
 _numberOfEnemies = 10
 _obstacleListWithWeights = Dictionary[ExtResource("4_36kbx"), float]({})

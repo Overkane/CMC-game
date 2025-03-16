@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Biome" load_steps=27 format=3 uid="uid://borv82a02dcop"]
+[gd_resource type="Resource" script_class="Biome" load_steps=26 format=3 uid="uid://borv82a02dcop"]
 
 [ext_resource type="Script" uid="uid://d10vaqoc62jaf" path="res://resources/biome_entity/biome_bonuses/biome_bonus.gd" id="1_0wb70"]
 [ext_resource type="Script" uid="uid://b2xccu6kwv00o" path="res://resources/biome_entity/biome_enemies/biome_enemy.gd" id="2_0fh2p"]
@@ -9,14 +9,14 @@
 [ext_resource type="Resource" uid="uid://cudlsdxsda8c1" path="res://resources/biome_entity/biome_bonuses/armor_bonus_1.tres" id="4_kpp2i"]
 [ext_resource type="Resource" uid="uid://854fma386ut0" path="res://resources/biome_entity/biome_bonuses/hp_potion.tres" id="5_kvbmq"]
 [ext_resource type="Resource" uid="uid://cteipl53ompcj" path="res://resources/biome_entity/biome_enemies/savanna/ogre.tres" id="5_rpab7"]
+[ext_resource type="Resource" uid="uid://dswv7ml8ucd6s" path="res://resources/biome_entity/biome_enemies/savanna/orc.tres" id="6_aqtwl"]
 [ext_resource type="Resource" uid="uid://vi1fhcp5xx2l" path="res://resources/biome_entity/biome_bonuses/speed_bonus_1.tres" id="6_htupl"]
 [ext_resource type="Resource" uid="uid://djcjyqaeuc82u" path="res://resources/biome_entity/biome_bonuses/damage_bonus_3.tres" id="7_banri"]
 [ext_resource type="Script" uid="uid://cx5rm5tkpr7hh" path="res://resources/biome_entity/biome_obstacles/biome_obstacle.gd" id="7_pynoe"]
+[ext_resource type="Resource" uid="uid://bap0m2sceputi" path="res://resources/biome_entity/biome_enemies/savanna/goblin_king.tres" id="8_5i486"]
 [ext_resource type="Resource" uid="uid://b8sf21n7aon84" path="res://resources/biome_entity/biome_bonuses/armor_bonus_2.tres" id="8_eo7h7"]
 [ext_resource type="Resource" uid="uid://pdnqpbxhq0w7" path="res://resources/biome_entity/biome_bonuses/speed_bonus_2.tres" id="9_kmggg"]
 [ext_resource type="Script" uid="uid://d2ek2lhs3uda8" path="res://resources/biomes/biome.gd" id="9_pij7r"]
-[ext_resource type="Resource" path="6" id="14_6adx1"]
-[ext_resource type="Resource" path="10" id="16_3ox71"]
 [ext_resource type="Texture2D" uid="uid://dq206x3seyisp" path="res://assets/art/props/savanna_grass2.png" id="17_hs1lr"]
 [ext_resource type="Texture2D" uid="uid://bq0tymad2k0dp" path="res://assets/art/props/savanna_grass3.png" id="18_747fb"]
 [ext_resource type="Texture2D" uid="uid://bil5woq62ohs" path="res://assets/art/props/savanna_grass4.png" id="19_sntjb"]
@@ -25,23 +25,20 @@
 [ext_resource type="Texture2D" uid="uid://uiiopkuyvnvq" path="res://assets/art/props/autumn_bush.png" id="22_mp3my"]
 [ext_resource type="Texture2D" uid="uid://c1cd3tc0ykwwu" path="res://assets/art/props/autumn_tree.png" id="23_55hpb"]
 [ext_resource type="Texture2D" uid="uid://ebw8fmhtquyu" path="res://assets/art/props/big_rock.png" id="24_vuywh"]
-[ext_resource type="Resource" path="3" id="25_8ykey"]
 
 [resource]
 script = ExtResource("9_pij7r")
 biomeType = 1
 numberOfChunks = 6
-boss = ExtResource("25_8ykey")
+boss = ExtResource("8_5i486")
 _enemyListWithWeights = Dictionary[ExtResource("2_0fh2p"), float]({
 ExtResource("3_y4h2v"): 80.0,
 ExtResource("4_e5ndv"): 30.0,
 ExtResource("5_rpab7"): 40.0,
-ExtResource("14_6adx1"): 50.0
+ExtResource("6_aqtwl"): 30.0
 })
 _numberOfEnemies = 10
-_obstacleListWithWeights = Dictionary[ExtResource("7_pynoe"), float]({
-ExtResource("16_3ox71"): 1.0
-})
+_obstacleListWithWeights = Dictionary[ExtResource("7_pynoe"), float]({})
 _numberOfObstacles = 4
 _bonusListWithWeights = Dictionary[ExtResource("1_0wb70"), float]({
 ExtResource("2_ho0e2"): 20.0,
