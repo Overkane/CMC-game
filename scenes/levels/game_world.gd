@@ -1,6 +1,6 @@
 extends Node2D
 
-const _FINAL_BOSS_SHIFT := 250
+const _FINAL_BOSS_SHIFT := 500
 const _INITIAL_PATH_OFFSET := 200.0
 const _END_PATH_OFFSET := 150.0
 const _MINIMAL_DISTANCE_BETWEEN_BIOME_ENTITIES := 100.0
@@ -17,8 +17,6 @@ const _BIOMES: Array[Biome] = [
 var _isIntro := true
 var _isGameStarted := false
 var _canRestartGame := false
-# Player shouldn't be able to see behind the final boss, since there can be no tiles generated.
-var _playerRightCameraLimit := 0
 
 @onready var _roadTileMapLayer: TileMapLayer = $RoadTileMapLayer
 
@@ -35,7 +33,6 @@ func _ready() -> void:
 	await $AnimationPlayer.animation_finished
 	_isIntro = false
 	GameConstants.player.camera.enabled = true
-	GameConstants.player.camera.limit_right = true
 	$IntroCamera2D.enabled = false
 	%StartGameHintText.show()
 
@@ -138,13 +135,12 @@ func _generateBiomes() -> void:
 				add_child(bossEntity)
 
 		biomeDistanceShift += fullBiomeDistance
-		_playerRightCameraLimit += biomeDistanceShift
 
 func _onPlayer_died() -> void:
 	%RestartGameHintText.show()
 	_canRestartGame = true
 
 func _onFinalBossDefeated() -> void:
-	GameConstants.player.isMovementDisabled = false
+	GameConstants.player.isMovementDisabled = true
 	GameConstants.player.changeAnimation("idle")
 	$AnimationPlayer.play("ending_transition")
