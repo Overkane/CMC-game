@@ -2,7 +2,7 @@ extends Node2D
 
 const _FINAL_BOSS_SHIFT := 500
 const _INITIAL_PATH_OFFSET := 200.0
-const _END_PATH_OFFSET := 150.0
+const _END_PATH_OFFSET := 100.0
 const _MINIMAL_DISTANCE_BETWEEN_BIOME_ENTITIES := 100.0
 const _ENEMY_SCENE: PackedScene = preload("res://scenes/interactibles/enemy/enemy.tscn")
 const _BONUS_SCENE: PackedScene = preload("res://scenes/interactibles/bonus/bonus.tscn")

@@ -15,5 +15,6 @@ metadata/_custom_type_script = "uid://cgjljwqr8u107"
 script = ExtResource("2_q6rlj")
 enemyStats = SubResource("Resource_lwpa2")
 enemyExp = 4
+finalBoss = false
 sprite = ExtResource("3_8dboc")
 metadata/_custom_type_script = "uid://b2xccu6kwv00o"

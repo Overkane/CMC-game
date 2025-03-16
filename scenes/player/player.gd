@@ -98,6 +98,7 @@ func changeHP(value: int) -> void:
 	_updatePlayerStatsUI()
 	if currentHP <= 0:
 		isDead = true
+		$DeathSound.play()
 		$AnimatedSprite2D.play("death")
 		await $AnimatedSprite2D.animation_finished
 		died.emit()
@@ -154,6 +155,7 @@ func _onAreaEntered(body: Node2D) -> void:
 	if not isDead and body is Enemy:
 		var attackVariant := randi_range(1, 3)
 		$AnimatedSprite2D.play("attack%s" % attackVariant)
+		get_node("HitSound%s" % attackVariant).play()
 		await $AnimatedSprite2D.animation_finished
 		# In case dead during attack animation
 		if not isDead and not isMovementDisabled:

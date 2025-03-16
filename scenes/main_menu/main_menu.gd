@@ -7,7 +7,7 @@ const _WORLD_SCENE := preload("res://scenes/levels/game_world.tscn")
 const _DEFAULT_MASTER_AUDIO_VOLUME := 0.5
 
 var _currentButtonNumber := 2
-
+var _canPlayButtonFocusEnteredSound := false
 
 func _ready() -> void:
 	%PlayButton.pressed.connect(_onPlayButton_pressed)
@@ -15,6 +15,18 @@ func _ready() -> void:
 	%OptionsBackButton.pressed.connect(_onOptionsBackButton_pressed)
 	%CreditsButton.pressed.connect(_onCreditsButton_pressed)
 	%CreditsBackButton.pressed.connect(_onCreditsBackButton_pressed)
+
+	%PlayButton.focus_entered.connect(_onButton_focusEntered)
+	%OptionsButton.focus_entered.connect(_onButton_focusEntered)
+	%CreditsButton.focus_entered.connect(_onButton_focusEntered)
+
+	%PlayButton.focus_exited.connect(_onButton_focusExited)
+	%OptionsButton.focus_exited.connect(_onButton_focusExited)
+	%CreditsButton.focus_exited.connect(_onButton_focusExited)
+
+	%OptionsBackButton.focus_exited.connect(_onBackButton_focusExited)
+	%CreditsBackButton.focus_exited.connect(_onBackButton_focusExited)
+
 	%MasterSlider.value_changed.connect(_onMasterSlider_valueChanged)
 	%MusicSlider.value_changed.connect(_onMusicSlider_valueChanged)
 	%SFXSlider.value_changed.connect(_onSFXSlider_valueChanged)
@@ -48,6 +60,7 @@ func _setDefaultAudioSettings() -> void:
 
 
 func _onPlayButton_pressed() -> void:
+	$ButtonPressedSFX.play()
 	%MainMenu.hide()
 	%PlayerSprite.play("run")
 	%AnimationPlayer.play("game_start")
@@ -55,28 +68,44 @@ func _onPlayButton_pressed() -> void:
 	get_tree().change_scene_to_packed(_WORLD_SCENE)
 
 func _onOptionsButton_pressed() -> void:
+	$ButtonPressedSFX.play()
 	%MainMenu.hide()
 	%PlayerSprite.hide()
 	%OptionsContainer.show()
 	%OptionsBackButton.call_deferred("grab_focus")
 
 func _onOptionsBackButton_pressed() -> void:
+	$ButtonPressedSFX.play()
 	%MainMenu.show()
 	%PlayerSprite.show()
 	%OptionsContainer.hide()
 	%OptionsButton.call_deferred("grab_focus")
 
 func _onCreditsButton_pressed() -> void:
+	$ButtonPressedSFX.play()
 	%MainMenu.hide()
 	%PlayerSprite.hide()
 	%CreditsContainer.show()
 	%CreditsBackButton.call_deferred("grab_focus")
 
 func _onCreditsBackButton_pressed() -> void:
+	$ButtonPressedSFX.play()
 	%MainMenu.show()
 	%PlayerSprite.show()
 	%CreditsContainer.hide()
 	%CreditsButton.call_deferred("grab_focus")
+
+func _onButton_focusEntered() -> void:
+	if _canPlayButtonFocusEnteredSound:
+		$ButtonFocusSFX.play()
+		_canPlayButtonFocusEnteredSound = false
+
+func _onButton_focusExited() -> void:
+	_canPlayButtonFocusEnteredSound = true
+
+# Should be no focus sound, when returning to main menu from sub-menu.
+func _onBackButton_focusExited() -> void:
+	_canPlayButtonFocusEnteredSound = false
 
 func _onMasterSlider_valueChanged(value: float) -> void:
 	AudioServer.set_bus_volume_db(SoundBus.MASTER, linear_to_db(value))

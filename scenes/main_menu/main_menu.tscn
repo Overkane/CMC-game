@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://bn83hsijp1cp4"]
+[gd_scene load_steps=22 format=4 uid="uid://bn83hsijp1cp4"]
 
 [ext_resource type="TileSet" uid="uid://h7n345jie2jq" path="res://resources/game_world_tileset.tres" id="1_fsom3"]
 [ext_resource type="Script" uid="uid://ca3f7643ewl1y" path="res://scenes/main_menu/main_menu.gd" id="1_uqeha"]
@@ -14,6 +14,10 @@
 [ext_resource type="Texture2D" uid="uid://b0fwx1sqt5swn" path="res://assets/art/props/grass4.png" id="13_i7nm7"]
 [ext_resource type="AudioStream" uid="uid://wll8wdnwgl4b" path="res://assets/music/8bit-spaceshooter.mp3" id="14_dn3lk"]
 [ext_resource type="Texture2D" uid="uid://cntbkxgv40gtf" path="res://assets/art/props/grass.png" id="14_tfctf"]
+[ext_resource type="AudioStream" uid="uid://dmeqfwvnkrfdo" path="res://assets/sfx/Menu_Navigate_00.wav" id="15_vnpsp"]
+[ext_resource type="AudioStream" uid="uid://b5ji7lcaiqn2k" path="res://assets/sfx/Menu_Navigate_01.wav" id="16_a1gy5"]
+[ext_resource type="AudioStream" uid="uid://cr37mmha2exfu" path="res://assets/sfx/sfx_movement_footsteps1a.wav" id="17_bq5lc"]
+[ext_resource type="AudioStream" uid="uid://dqdic6jf5jx6p" path="res://assets/sfx/sfx_movement_footsteps1b.wav" id="18_xac7c"]
 
 [sub_resource type="Animation" id="Animation_wem23"]
 length = 0.001
@@ -44,7 +48,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("AudioStreamPlayer:volume_db")
+tracks/2/path = NodePath("Music:volume_db")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -52,6 +56,54 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Step1SFX:volume_db")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Step1SFX2:volume_db")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Step1SFX:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Step1SFX2:playing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_uqeha"]
@@ -84,7 +136,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("AudioStreamPlayer:volume_db")
+tracks/2/path = NodePath("Music:volume_db")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -92,6 +144,54 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [0.0, -45.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Step1SFX:volume_db")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 2.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -45.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Step1SFX2:volume_db")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 2.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -45.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Step1SFX:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.633333, 0.933333, 1.2, 1.46667, 1.73333, 2, 2.26667, 2.53333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, true, true, true, true, true, true, true, true, true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Step1SFX2:playing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.133333, 0.466667, 0.766667, 1.06667, 1.33333, 1.6, 1.86667, 2.13333, 2.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, true, true, true, true, true, true, true, true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_wem23"]
@@ -538,10 +638,14 @@ Licensed under Creative Commons: By Attribution 4.0 License
 http://creativecommons.org/licenses/by/4.0/
 2. \"a wish to fulfill\" Centurion_of_war (https://opengameart.org/content/a-wish-to-fulfill-updated)
 3. \"8-bit Epic Space Shooter Music\" HydroGene (https://opengameart.org/content/8-bit-epic-space-shooter-music)
+
+SFX:
+1. \"8-Bit Sound Effects Library\" Little Robot Sound Factory (www.littlerobotsoundfactory.com)
+
 Art:
 1. \"32rogues\" Seth (https://sethbb.itch.io/32rogues)
 2. \"hana caraka topdown tileset\" Otterisk (https://otterisk.itch.io/hana-caraka-topdown-tileset)
-3. \"Animated Traps\" Stealthix (https://stealthix.itch.io/animated-traps)"
+3. \"Animated Traps\" Stealthix ()"
 
 [node name="MarginContainer" type="MarginContainer" parent="CreditsContainer/VBoxContainer"]
 layout_mode = 2
@@ -554,7 +658,23 @@ size_flags_horizontal = 6
 size_flags_vertical = 8
 text = "Back"
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("14_dn3lk")
 autoplay = true
 bus = &"Music"
+
+[node name="ButtonPressedSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("15_vnpsp")
+bus = &"SFX"
+
+[node name="ButtonFocusSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("16_a1gy5")
+bus = &"SFX"
+
+[node name="Step1SFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("17_bq5lc")
+bus = &"SFX"
+
+[node name="Step1SFX2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("18_xac7c")
+bus = &"SFX"

@@ -29,10 +29,10 @@
     },
     "res://resources/biome_entity/": {
       "resource_local_to_scene": {
-        "visibility": 0
+        "visibility": 0.0
       },
       "resource_name": {
-        "visibility": 0
+        "visibility": 0.0
       }
     },
     "res://resources/biome_info/": {
