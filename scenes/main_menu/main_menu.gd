@@ -4,7 +4,7 @@ enum SoundBus { MASTER, MUSIC, SFX }
 
 const _NUMBER_OF_BUTTONS := 3
 const _WORLD_SCENE := preload("res://scenes/levels/game_world.tscn")
-const _DEFAULT_MASTER_AUDIO_VOLUME := 0.65
+const _DEFAULT_MASTER_AUDIO_VOLUME := 0.5
 
 var _currentButtonNumber := 2
 
