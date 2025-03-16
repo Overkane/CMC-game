@@ -1,5 +1,6 @@
 extends Node2D
 
+const _FINAL_BOSS_SHIFT := 250
 const _INITIAL_PATH_OFFSET := 200.0
 const _END_PATH_OFFSET := 150.0
 const _MINIMAL_DISTANCE_BETWEEN_BIOME_ENTITIES := 100.0
@@ -13,15 +14,18 @@ const _BIOMES: Array[Biome] = [
 	preload("res://resources/biomes/dragon_lair_biome.tres"),
 ]
 
-var isIntro := true
-var isGameStarted := false
-var canRestartGame := false
+var _isIntro := true
+var _isGameStarted := false
+var _canRestartGame := false
+# Player shouldn't be able to see behind the final boss, since there can be no tiles generated.
+var _playerRightCameraLimit := 0
 
 @onready var _roadTileMapLayer: TileMapLayer = $RoadTileMapLayer
 
 
 func _ready() -> void:
 	%Player.died.connect(_onPlayer_died)
+	EventBus.finalBossDefeated.connect(_onFinalBossDefeated)
 
 	GameConstants.player = %Player
 	GameConstants.player.isMovementDisabled = true
@@ -29,19 +33,20 @@ func _ready() -> void:
 	_generateBiomes()
 
 	await $AnimationPlayer.animation_finished
-	isIntro = false
+	_isIntro = false
 	GameConstants.player.camera.enabled = true
+	GameConstants.player.camera.limit_right = true
 	$IntroCamera2D.enabled = false
 	%StartGameHintText.show()
 
 func _input(event: InputEvent) -> void:
-	if not isIntro and not isGameStarted and event is InputEventKey:
-		isGameStarted = true
+	if not _isIntro and not _isGameStarted and event is InputEventKey:
+		_isGameStarted = true
 		%StartGameHintText.hide()
 		GameConstants.player.isMovementDisabled = false
 		GameConstants.player.changeAnimation("walk")
-	elif canRestartGame and event is InputEventKey:
-		canRestartGame = false
+	elif _canRestartGame and event is InputEventKey:
+		_canRestartGame = false
 		%RestartGameHintText.hide()
 		$AnimationPlayer.play("restart_transition")
 		await $AnimationPlayer.animation_finished
@@ -124,15 +129,22 @@ func _generateBiomes() -> void:
 
 				distanceRemainder = distanceForOneEntity + distanceRemainder - positionChange
 
-			# Spawn boss
-			var bossPosition := Vector2(fullBiomeDistance + biomeDistanceShift, biomeEntityPosition.y)
-			var bossEntity := _ENEMY_SCENE.instantiate()
-			bossEntity.setup(biome.boss, bossPosition)
-			add_child(bossEntity)
+			# Spawn boss. Final boss spawned only in middle, cuz he will be big.
+			if not biome.boss.finalBoss or biome.boss.finalBoss and i == GameConstants.NUMBER_OF_MIDDLE_PATH:
+				var additionalShift := _FINAL_BOSS_SHIFT if biome.boss.finalBoss else 0
+				var bossPosition := Vector2(fullBiomeDistance + biomeDistanceShift - additionalShift, biomeEntityPosition.y)
+				var bossEntity := _ENEMY_SCENE.instantiate()
+				bossEntity.setup(biome.boss, bossPosition)
+				add_child(bossEntity)
 
 		biomeDistanceShift += fullBiomeDistance
-
+		_playerRightCameraLimit += biomeDistanceShift
 
 func _onPlayer_died() -> void:
 	%RestartGameHintText.show()
-	canRestartGame = true
+	_canRestartGame = true
+
+func _onFinalBossDefeated() -> void:
+	GameConstants.player.isMovementDisabled = false
+	GameConstants.player.changeAnimation("idle")
+	$AnimationPlayer.play("ending_transition")

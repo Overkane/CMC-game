@@ -1,9 +1,13 @@
 extends Area2D
 class_name Enemy
 
+const _FINAL_BOSS_SCALE := 7
+
 var _baseStats: BaseStats
 var _damageToThePlayer: int
 var _enemyExp: int
+var _finalBoss: bool
+
 
 func setup(biomeEntity: BiomeEnemy, biomeEntityPosition: Vector2) -> void:
 	EventBus.playerStatsChanged.connect(_updateTotalDamageToThePlayer)
@@ -19,10 +23,19 @@ func setup(biomeEntity: BiomeEnemy, biomeEntityPosition: Vector2) -> void:
 	%ArmorLabel.text = str(_baseStats.armor)
 	_updateTotalDamageToThePlayer()
 
+	if biomeEntity.finalBoss:
+		_finalBoss = true
+		scale *= _FINAL_BOSS_SCALE
+
 func interact() -> void:
 	GameConstants.player.changeHP(-_damageToThePlayer)
 	if not GameConstants.player.isDead:
-		_destroy()
+		if _finalBoss:
+			EventBus.finalBossDefeated.emit()
+			var tween := create_tween()
+			tween.tween_property(self, "rotation", PI / 2, 1)
+		else:
+			_destroy()
 
 
 func _updateTotalDamageToThePlayer() -> void:

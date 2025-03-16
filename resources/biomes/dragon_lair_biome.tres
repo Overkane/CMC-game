@@ -10,7 +10,7 @@
 [resource]
 script = ExtResource("5_a5pgf")
 biomeType = 2
-numberOfChunks = 1
+numberOfChunks = 2
 boss = ExtResource("4_2cm1p")
 _enemyListWithWeights = Dictionary[ExtResource("2_crrud"), float]({})
 _numberOfEnemies = 4
