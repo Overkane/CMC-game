@@ -3,8 +3,8 @@ class_name Player
 
 signal died
 
-const _MIN_SPEED := 50
-const _MAX_SPEED := _MIN_SPEED * 4
+const _MIN_SPEED := 55
+const _MAX_SPEED := _MIN_SPEED * 3
 @warning_ignore("integer_division")
 const _INITIAL_SPEED := (_MIN_SPEED + _MAX_SPEED) / 2
 const _SPEED_INCREASE_PER_SECOND := 1
@@ -21,35 +21,19 @@ var maxHP: int:
 var currentHP: int:
 	set(value):
 		currentHP = clamp(value, 0, maxHP)
-var currentDamage: int:
-	get():
-		return currentDamage * _speedStatModifier
-var currentArmor: int:
-	get():
-		return currentArmor * _speedStatModifier
-var currentSpeed := _INITIAL_SPEED:
-	set(value):
-		currentSpeed = clamp(value, _MIN_SPEED, _MAX_SPEED)
-		# High speed, positive bonus to stats.
-		if currentSpeed >= (_INITIAL_SPEED + _MAX_SPEED) / 2:
-			_speedStatModifier = 1.5
-			%SpeedIconMinus.hide()
-			%SpeedIcon.hide()
-			%SpeedIconPlus.show()
-		# Slow speed, negative bonus to stats.
-		elif currentSpeed <= (_INITIAL_SPEED + _MIN_SPEED) / 2:
-			_speedStatModifier = 0.5
-			%SpeedIconMinus.show()
-			%SpeedIcon.hide()
-			%SpeedIconPlus.hide()
-		else:
-			_speedStatModifier = 1
-			%SpeedIconMinus.hide()
-			%SpeedIcon.show()
-			%SpeedIconPlus.hide()
+var currentDamage := 0
+var currentArmor := 0
 var isDead := false
 var isMovementDisabled := false
 
+var _baseDamage := 0:
+	set(value):
+		_baseDamage = value
+		currentDamage = _baseDamage * _speedStatModifier
+var _baseArmor := 0:
+	set(value):
+		_baseArmor = value
+		currentArmor = _baseArmor * _speedStatModifier
 var _currentPathNumber := 3
 var _currentMoveAnimation := "walk"
 var _speedStatModifier := 1.0:
@@ -59,6 +43,26 @@ var _speedStatModifier := 1.0:
 		if _speedStatModifier != oldSpeedModifier:
 			# Trigger stat setters to recalculate with new speed modifier
 			_updatePlayerStatsUI()
+var _currentSpeed := _INITIAL_SPEED:
+	set(value):
+		_currentSpeed = clamp(value, _MIN_SPEED, _MAX_SPEED)
+		# High speed, positive bonus to stats.
+		if _currentSpeed >= (_INITIAL_SPEED + _MAX_SPEED) / 2:
+			_speedStatModifier = 1.5
+			%SpeedIconMinus.hide()
+			%SpeedIcon.hide()
+			%SpeedIconPlus.show()
+		# Slow speed, negative bonus to stats.
+		elif _currentSpeed <= (_INITIAL_SPEED + _MIN_SPEED) / 2:
+			_speedStatModifier = 0.5
+			%SpeedIconMinus.show()
+			%SpeedIcon.hide()
+			%SpeedIconPlus.hide()
+		else:
+			_speedStatModifier = 1
+			%SpeedIconMinus.hide()
+			%SpeedIcon.show()
+			%SpeedIconPlus.hide()
 
 @onready var camera: Camera2D = $Camera2D
 
@@ -73,8 +77,8 @@ func _ready() -> void:
 	EventBus.enemyDefeated.connect(_onEnemyDefeated)
 
 	maxHP = _baseStats.maxHP
-	currentDamage = _baseStats.damage
-	currentArmor = _baseStats.armor
+	_baseDamage = _baseStats.damage
+	_baseArmor = _baseStats.armor
 
 	_updatePlayerStatsUI()
 	$SpeedTimer.start()
@@ -89,7 +93,7 @@ func changeHP(value: int) -> void:
 
 	# On taking damage you slow down based on damage.
 	if value < 0:
-		currentSpeed += value
+		_currentSpeed += value
 
 	_updatePlayerStatsUI()
 	if currentHP <= 0:
@@ -99,18 +103,18 @@ func changeHP(value: int) -> void:
 		died.emit()
 
 func changeDamage(value: int) -> void:
-	currentDamage += value
+	_baseDamage += value
 	_updatePlayerStatsUI()
 
 func changeArmor(value: int) -> void:
-	currentArmor += value
+	_baseArmor += value
 	_updatePlayerStatsUI()
 
 func changeSpeed(value: int) -> void:
-	currentSpeed += value
+	_currentSpeed += value
 
 	@warning_ignore("integer_division")
-	if currentSpeed >= (_INITIAL_SPEED + _MAX_SPEED) / 2:
+	if _currentSpeed >= (_INITIAL_SPEED + _MAX_SPEED) / 2:
 		_currentMoveAnimation = "run"
 	else:
 		_currentMoveAnimation = "walk"
@@ -123,7 +127,7 @@ func changeAnimation(animationName: String) -> void:
 
 func _applyMovement(delta: float) -> void:
 	# Base horizontal movement
-	global_position += Vector2.RIGHT * currentSpeed * delta
+	global_position += Vector2.RIGHT * _currentSpeed * delta
 
 	# Vertical movement
 	var verticalVector := Vector2.ZERO
@@ -139,7 +143,7 @@ func _updatePlayerStatsUI() -> void:
 	%HPLabel.text = "%s/%s" % [currentHP, maxHP]
 	%DamageLabel.text = str(currentDamage)
 	%ArmorLabel.text = str(currentArmor)
-	%SpeedLabel.text = str(currentSpeed)
+	%SpeedLabel.text = str(_currentSpeed)
 	EventBus.playerStatsChanged.emit()
 
 
@@ -152,7 +156,7 @@ func _onAreaEntered(body: Node2D) -> void:
 		$AnimatedSprite2D.play("attack%s" % attackVariant)
 		await $AnimatedSprite2D.animation_finished
 		# In case dead during attack animation
-		if not isDead:
+		if not isDead and not isMovementDisabled:
 			$AnimatedSprite2D.play(_currentMoveAnimation)
 
 func _onEnemyDefeated(expGained: int) -> void:
@@ -163,6 +167,6 @@ func _onLevelingSystem_levelUp(currentLevel: int) -> void:
 	# Reduced value for max hp increase, cuz otherwise it would be too strong.
 	@warning_ignore("integer_division")
 	maxHP += levelForStatIncrease * _baseStats.maxHP / 10
-	currentDamage += levelForStatIncrease * _baseStats.damage
-	currentArmor += levelForStatIncrease * _baseStats.armor
+	_baseDamage += levelForStatIncrease * _baseStats.damage
+	_baseArmor += levelForStatIncrease * _baseStats.armor
 	_updatePlayerStatsUI()
