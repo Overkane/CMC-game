@@ -1,17 +1,8 @@
-[gd_scene load_steps=11 format=4 uid="uid://qvkd8kte8h62"]
+[gd_scene load_steps=9 format=4 uid="uid://qvkd8kte8h62"]
 
 [ext_resource type="Script" uid="uid://cx3xmev5fl5tf" path="res://scenes/levels/game_world.gd" id="1_hyc8p"]
 [ext_resource type="TileSet" uid="uid://h7n345jie2jq" path="res://resources/game_world_tileset.tres" id="2_4r7d4"]
-[ext_resource type="Script" uid="uid://cgjljwqr8u107" path="res://resources/base_stats/base_stats.gd" id="4_7y55x"]
 [ext_resource type="PackedScene" uid="uid://bc6ovnknimcn5" path="res://scenes/player/player.tscn" id="4_b3nq0"]
-
-[sub_resource type="Resource" id="Resource_7y55x"]
-resource_local_to_scene = true
-script = ExtResource("4_7y55x")
-maxHP = 100
-armor = 1
-damage = 4
-metadata/_custom_type_script = "uid://cgjljwqr8u107"
 
 [sub_resource type="Animation" id="Animation_7y55x"]
 length = 0.001
@@ -159,7 +150,6 @@ tile_set = ExtResource("2_4r7d4")
 [node name="Player" parent="." instance=ExtResource("4_b3nq0")]
 unique_name_in_owner = true
 position = Vector2(-40, 193)
-_baseStats = SubResource("Resource_7y55x")
 
 [node name="StartGameHintText" type="RichTextLabel" parent="Player"]
 unique_name_in_owner = true

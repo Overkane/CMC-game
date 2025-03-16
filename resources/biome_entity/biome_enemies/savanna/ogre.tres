@@ -6,14 +6,15 @@
 
 [sub_resource type="Resource" id="Resource_lwpa2"]
 script = ExtResource("1_cfepr")
-maxHP = 45
-armor = 5
+maxHP = 100
+armor = 1
 damage = 10
 metadata/_custom_type_script = "uid://cgjljwqr8u107"
 
 [resource]
 script = ExtResource("2_ahe3k")
 enemyStats = SubResource("Resource_lwpa2")
-enemyExp = 20
+enemyExp = 8
+finalBoss = false
 sprite = ExtResource("3_cfepr")
 metadata/_custom_type_script = "uid://b2xccu6kwv00o"

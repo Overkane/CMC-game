@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("1_4ov60")
 bonusType = 0
-bonusValue = 5
+bonusValue = 4
 sprite = ExtResource("2_h42a1")
 metadata/_custom_type_script = "uid://d10vaqoc62jaf"

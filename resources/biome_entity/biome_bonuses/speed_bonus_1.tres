@@ -1,11 +1,10 @@
-[gd_resource type="Resource" script_class="BiomeBonus" load_steps=3 format=3 uid="uid://vi1fhcp5xx2l"]
+[gd_resource type="Resource" script_class="BiomeBonus" load_steps=2 format=3 uid="uid://vi1fhcp5xx2l"]
 
 [ext_resource type="Script" uid="uid://d10vaqoc62jaf" path="res://resources/biome_entity/biome_bonuses/biome_bonus.gd" id="1_0mn8m"]
-[ext_resource type="Texture2D" uid="uid://c0421kwoh0lw0" path="res://assets/art/bonuses/speed_bonus1.png" id="2_de4fn"]
 
 [resource]
 script = ExtResource("1_0mn8m")
 bonusType = 2
-bonusValue = 20
-sprite = ExtResource("2_de4fn")
+bonusValue = 15
+sprite = 30
 metadata/_custom_type_script = "uid://d10vaqoc62jaf"

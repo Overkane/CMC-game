@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Biome" load_steps=17 format=3 uid="uid://btu8p2uaqgmik"]
+[gd_resource type="Resource" script_class="Biome" load_steps=24 format=3 uid="uid://btu8p2uaqgmik"]
 
 [ext_resource type="Script" uid="uid://d10vaqoc62jaf" path="res://resources/biome_entity/biome_bonuses/biome_bonus.gd" id="1_cabl0"]
 [ext_resource type="Script" uid="uid://d2ek2lhs3uda8" path="res://resources/biomes/biome.gd" id="1_xxwf7"]
@@ -11,11 +11,18 @@
 [ext_resource type="Resource" uid="uid://ds0bgmljc5wpw" path="res://resources/biome_entity/biome_enemies/snow/necromancer.tres" id="4_qddrl"]
 [ext_resource type="Resource" uid="uid://vi1fhcp5xx2l" path="res://resources/biome_entity/biome_bonuses/speed_bonus_1.tres" id="5_65pmf"]
 [ext_resource type="Resource" uid="uid://28j3ji2xaavk" path="res://resources/biome_entity/biome_enemies/snow/skeleton.tres" id="5_qtj3m"]
-[ext_resource type="Resource" uid="uid://cp8qiiti5tujq" path="res://resources/biome_entity/biome_enemies/snow/zombie.tres" id="6_31dge"]
 [ext_resource type="Resource" uid="uid://djcjyqaeuc82u" path="res://resources/biome_entity/biome_bonuses/damage_bonus_3.tres" id="6_dkib7"]
 [ext_resource type="Resource" uid="uid://b8sf21n7aon84" path="res://resources/biome_entity/biome_bonuses/armor_bonus_2.tres" id="7_1h5x5"]
 [ext_resource type="Resource" uid="uid://d1lxppl4wqa4e" path="res://resources/biome_entity/biome_enemies/snow/death_knight.tres" id="8_4h1w0"]
 [ext_resource type="Resource" uid="uid://pdnqpbxhq0w7" path="res://resources/biome_entity/biome_bonuses/speed_bonus_2.tres" id="8_rqx8m"]
+[ext_resource type="Resource" path="8" id="13_gfk30"]
+[ext_resource type="Texture2D" uid="uid://dwc471g21eobm" path="res://assets/art/props/snow_bush2.png" id="15_gfk30"]
+[ext_resource type="Texture2D" uid="uid://b8gol3b7ise2k" path="res://assets/art/props/snow_bush.png" id="16_pvfxw"]
+[ext_resource type="Texture2D" uid="uid://b1qjliynej6ta" path="res://assets/art/props/snow_tree.png" id="17_rx4u8"]
+[ext_resource type="Texture2D" uid="uid://d3a0oae62pm5b" path="res://assets/art/props/small_snow_rock2.png" id="18_sqpxd"]
+[ext_resource type="Texture2D" uid="uid://c4xb2m6wyleq7" path="res://assets/art/props/small_snow_rock.png" id="19_k7viq"]
+[ext_resource type="Texture2D" uid="uid://lno45h8lh1ee" path="res://assets/art/props/snow.png" id="20_8kjci"]
+[ext_resource type="Texture2D" uid="uid://dk8ygqjanqpmf" path="res://assets/art/props/snow2.png" id="21_2qw5k"]
 
 [resource]
 script = ExtResource("1_xxwf7")
@@ -26,7 +33,7 @@ _enemyListWithWeights = Dictionary[ExtResource("2_xehji"), float]({
 ExtResource("3_02vlf"): 40.0,
 ExtResource("4_qddrl"): 20.0,
 ExtResource("5_qtj3m"): 80.0,
-ExtResource("6_31dge"): 70.0
+ExtResource("13_gfk30"): 70.0
 })
 _numberOfEnemies = 10
 _obstacleListWithWeights = Dictionary[ExtResource("4_36kbx"), float]({})
@@ -41,6 +48,14 @@ ExtResource("7_1h5x5"): 40.0,
 ExtResource("8_rqx8m"): 30.0
 })
 _numberOfBonuses = 6
-_propSpritesWithWeights = Dictionary[Texture2D, float]({})
-_numberOfPropsPerChunk = 20
+_propSpritesWithWeights = Dictionary[Texture2D, float]({
+ExtResource("15_gfk30"): 30.0,
+ExtResource("16_pvfxw"): 30.0,
+ExtResource("17_rx4u8"): 10.0,
+ExtResource("18_sqpxd"): 4.0,
+ExtResource("19_k7viq"): 3.0,
+ExtResource("20_8kjci"): 50.0,
+ExtResource("21_2qw5k"): 50.0
+})
+_numberOfPropsPerChunk = 50
 metadata/_custom_type_script = "uid://d2ek2lhs3uda8"

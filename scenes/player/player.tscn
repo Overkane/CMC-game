@@ -13,9 +13,9 @@
 
 [sub_resource type="Resource" id="Resource_0owmy"]
 script = ExtResource("2_0owmy")
-maxHP = 100
+maxHP = 50
 armor = 1
-damage = 4
+damage = 2
 metadata/_custom_type_script = "uid://cgjljwqr8u107"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dovo2"]

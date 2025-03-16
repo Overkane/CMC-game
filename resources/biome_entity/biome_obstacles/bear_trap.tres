@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_syj2q")
-damage = 5
+damage = 5.0
 numberOfHorizontalFrames = 4
 sprite = ExtResource("2_t8j0s")
 metadata/_custom_type_script = "uid://cx5rm5tkpr7hh"
