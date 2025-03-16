@@ -4,8 +4,8 @@ class_name LevelingSystem
 signal levelUp(currentLevel: int)
 
 @export var _maxLevel := 8
-@export var _expIncreasePerLevel := 8
-@export var _expForFirstLevel := 4
+@export var _expIncreasePerLevel := 12
+@export var _expForFirstLevel := 8
 
 var _expPerLevelList: Array[int]
 var _currentLevel := 1
