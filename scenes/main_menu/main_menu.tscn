@@ -532,12 +532,16 @@ layout_mode = 2
 text = "by Overkane
 
 Additional credits:
-1. \"surpass your limits!\" Preston Peak (https://opengameart.org/)
+Music:
+1. \"secret base\" Preston Peak (https://opengameart.org/content/free-action-chiptune-music-pack)
 Licensed under Creative Commons: By Attribution 4.0 License
 http://creativecommons.org/licenses/by/4.0/
-2. \"32rogues\" Seth (https://sethbb.itch.io/32rogues)
-3. \"hana caraka topdown tileset\" Otterisk (https://otterisk.itch.io/hana-caraka-topdown-tileset)
-"
+2. \"a wish to fulfill\" Centurion_of_war (https://opengameart.org/content/a-wish-to-fulfill-updated)
+3. \"8-bit Epic Space Shooter Music\" HydroGene (https://opengameart.org/content/8-bit-epic-space-shooter-music)
+Art:
+1. \"32rogues\" Seth (https://sethbb.itch.io/32rogues)
+2. \"hana caraka topdown tileset\" Otterisk (https://otterisk.itch.io/hana-caraka-topdown-tileset)
+3. \"Animated Traps\" Stealthix (https://stealthix.itch.io/animated-traps)"
 
 [node name="MarginContainer" type="MarginContainer" parent="CreditsContainer/VBoxContainer"]
 layout_mode = 2
