@@ -31,7 +31,7 @@ func interact() -> void:
 	GameConstants.player.changeHP(-_damageToThePlayer)
 	if not GameConstants.player.isDead:
 		if _finalBoss:
-			EventBus.finalBossDefeated.emit()
+			EventBus.UI.new().finalBossDefeated
 			var tween := create_tween()
 			tween.tween_property(self, "rotation", PI / 2, 1)
 		else:

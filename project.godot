@@ -25,7 +25,7 @@ resources_spreadsheet_view/freeze_first_column=true
 
 config/name="CMC-game"
 config/version="0.1.0"
-config/tags=PackedStringArray("template")
+config/tags=PackedStringArray("2d", "game_jam_game")
 run/main_scene="uid://bn83hsijp1cp4"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 run/max_fps=60
